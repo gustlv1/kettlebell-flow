@@ -64,23 +64,27 @@
   .panel-heading{ min-height:48px; padding:0 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
   .panel-title{ color:var(--fg); font-size:11px; font-weight:700; letter-spacing:1.3px; }
   .panel-index{ color:var(--primary); font-size:10px; font-weight:500; }
-  .panel-meta{ color:var(--muted-fg); font-size:9px; font-weight:500; letter-spacing:.5px; }
   .panel-body{ padding:14px; }
 
   .control-label{ color:var(--muted-fg); font-size:10px; font-weight:500; letter-spacing:1px; margin-bottom:9px; }
-  .duration-row{ display:flex; gap:8px; }
-  .duration-btn{ flex:1; min-height:58px; padding:0 12px; border:1px solid var(--border); background:var(--secondary); display:flex; align-items:center; gap:7px; cursor:pointer; color:inherit; }
-  .duration-btn.selected{ border-color:var(--primary); background:var(--accent); }
-  .duration-num{ color:var(--primary); font-size:26px; font-weight:700; }
-  .duration-btn:not(.selected) .duration-num{ color:var(--muted-fg); }
-  .duration-caption{ flex:1; color:var(--fg); font-size:10px; font-weight:700; letter-spacing:.6px; text-align:left; }
-  .duration-btn:not(.selected) .duration-caption{ color:var(--muted-fg); }
-  .check{ width:17px; height:17px; flex-shrink:0; }
+
+  /* Equipment, Session Mode, Session Length, Movement Level, and Categories all share
+     this one chip style - same height, same type, same selected treatment - so the
+     panel reads as one consistent system instead of four differently-sized controls. */
+  .duration-row, .level-row, .mode-row, .category-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .duration-btn, .level-btn, .mode-btn, .category-btn{
+    flex:1 1 calc(33.333% - 4px); min-height:46px; padding:0 4px;
+    border:1px solid var(--border); background:var(--secondary);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    color:var(--muted-fg); font-size:9.5px; font-weight:600; letter-spacing:.4px;
+    text-align:center; line-height:1.25; font-family:inherit;
+  }
+  .duration-btn.selected, .level-btn.selected, .mode-btn.selected, .category-btn.selected{
+    border-color:var(--primary); background:var(--accent); color:var(--fg);
+  }
+  .duration-btn:active, .level-btn:active, .mode-btn:active, .category-btn:active{ opacity:.72; }
 
   .level-label{ margin-top:18px; }
-  .level-row{ display:flex; gap:7px; }
-  .level-btn{ flex:1; min-height:47px; padding:0 6px; border:1px solid var(--border); background:var(--secondary); display:flex; align-items:center; justify-content:center; gap:5px; cursor:pointer; color:var(--muted-fg); font-size:10px; font-weight:600; text-align:center; }
-  .level-btn.selected{ border-color:var(--primary); background:var(--accent); color:var(--fg); }
 
   .generate-btn{ width:100%; min-height:55px; margin-top:20px; background:var(--primary); border:none; display:flex; justify-content:center; align-items:center; gap:10px; cursor:pointer; color:var(--primary-fg); font-size:12px; font-weight:700; letter-spacing:1.1px; }
   .generate-btn:active{ opacity:.72; }
@@ -104,7 +108,6 @@
   .amrap-strip{ min-height:70px; padding:0 14px; display:flex; align-items:center; justify-content:space-between; background:var(--muted); border-top:1px solid var(--border); }
   .amrap-label{ color:var(--muted-fg); font-size:9px; font-weight:500; letter-spacing:.7px; line-height:15px; }
   .amrap-value{ color:var(--primary); font-size:27px; font-weight:700; letter-spacing:-1px; }
-  .amrap-duration{ color:var(--muted-fg); font-size:9px; font-weight:500; letter-spacing:.5px; }
 
   .timer-body{ padding:18px; display:flex; flex-direction:column; align-items:center; }
   .timer-ring-wrap{ position:relative; width:220px; height:220px; margin:4px 0; }
@@ -122,6 +125,28 @@
   .round-btn{ width:40px; height:40px; background:var(--primary); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--primary-fg); font-size:22px; flex-shrink:0; }
   .round-btn:active{ opacity:.72; }
 
+  /* ---------- Round Tracker (Rounds session mode) ---------- */
+  .rt-body-wrap{ padding:18px; }
+  .rt-active{ display:flex; flex-direction:column; align-items:center; padding:8px 0 2px; }
+  .rt-active[hidden]{ display:none; }
+  .rt-count{ display:flex; align-items:baseline; gap:8px; }
+  .rt-count.has-progress{ cursor:pointer; }
+  .rt-count-num{ color:var(--fg); font-size:64px; font-weight:800; letter-spacing:-2px; line-height:1; font-variant-numeric:tabular-nums; }
+  .rt-count-of{ color:var(--muted-fg); font-size:20px; font-weight:700; }
+  .rt-label{ color:var(--muted-fg); font-size:9.5px; font-weight:500; letter-spacing:1.2px; margin-top:6px; }
+  .rt-undo{ color:var(--muted-fg); font-size:8.5px; font-weight:500; letter-spacing:.4px; margin-top:9px; text-decoration:underline; text-underline-offset:2px; cursor:pointer; background:none; border:none; font-family:inherit; padding:4px; }
+  .rt-undo[hidden]{ display:none; }
+  .rt-undo:active{ opacity:.6; }
+  .rt-finish-btn{ width:100%; min-height:52px; margin-top:22px; background:var(--primary); border:none; display:flex; justify-content:center; align-items:center; gap:9px; cursor:pointer; color:var(--primary-fg); font-size:11px; font-weight:700; letter-spacing:1px; font-family:inherit; }
+  .rt-finish-btn:active{ opacity:.72; }
+  .rt-done{ display:flex; flex-direction:column; align-items:center; padding:8px 0 2px; }
+  .rt-done[hidden]{ display:none; }
+  .rt-done-badge{ width:60px; height:60px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; margin-top:6px; }
+  .rt-done-label{ color:var(--fg); font-size:13px; font-weight:700; letter-spacing:.8px; margin-top:16px; }
+  .rt-done-sub{ color:var(--muted-fg); font-size:9.5px; font-weight:500; letter-spacing:.5px; margin-top:5px; text-align:center; line-height:1.5; }
+  .rt-done-btn{ width:100%; min-height:48px; margin-top:20px; border:1px solid var(--border); background:var(--secondary); display:flex; justify-content:center; align-items:center; gap:9px; cursor:pointer; color:var(--fg); font-size:10.5px; font-weight:700; letter-spacing:1px; font-family:inherit; }
+  .rt-done-btn:active{ opacity:.6; }
+
   .timer-btn{ width:100%; min-height:50px; border:1px solid var(--primary); background:transparent; display:flex; align-items:center; justify-content:center; gap:9px; cursor:pointer; color:var(--primary); font-size:11px; font-weight:700; letter-spacing:1px; }
   .timer-btn:active{ opacity:.72; }
 
@@ -132,11 +157,25 @@
 
   .icon-btn{ width:24px; height:24px; border:1px solid var(--border); background:var(--secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; }
   .icon-btn:active{ opacity:.6; }
+  .icon-btn.lg{ width:32px; height:32px; }
   .mute-btn.muted{ border-color:var(--primary); }
 
-  .category-row{ display:flex; gap:5px; }
-  .category-btn{ flex:1; min-height:44px; padding:0 2px; border:1px solid var(--border); background:var(--secondary); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--muted-fg); font-size:8.5px; font-weight:600; letter-spacing:.2px; text-align:center; line-height:1.2; }
-  .category-btn.selected{ border-color:var(--primary); background:var(--accent); color:var(--fg); }
+  .load-flow-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:29; }
+  .load-flow-backdrop[hidden]{ display:none; }
+  .load-flow-sheet{
+    position:fixed; left:0; right:0; bottom:0; max-height:75vh; z-index:30;
+    background:var(--card); border-top:1px solid var(--border);
+    display:flex; flex-direction:column; box-shadow:0 -12px 28px rgba(0,0,0,.45);
+  }
+  .load-flow-sheet[hidden]{ display:none; }
+  .load-flow-sheet-head{ display:flex; align-items:center; justify-content:space-between; min-height:52px; padding:0 14px; border-bottom:1px solid var(--border); flex-shrink:0; }
+  .load-flow-sheet-title{ color:var(--fg); font-size:11px; font-weight:700; letter-spacing:1.2px; }
+  .load-flow-sheet-list{ overflow-y:auto; -webkit-overflow-scrolling:touch; }
+  .load-flow-item{ display:block; width:100%; min-height:56px; text-align:left; padding:10px 14px; background:transparent; border:none; border-bottom:1px solid var(--border); cursor:pointer; font-family:inherit; }
+  .load-flow-item:last-child{ border-bottom:none; }
+  .load-flow-item:active{ background:var(--secondary); }
+  .load-flow-name{ color:var(--fg); font-size:12px; font-weight:700; letter-spacing:.3px; }
+  .load-flow-detail{ color:var(--muted-fg); font-size:9.5px; font-weight:500; letter-spacing:.4px; margin-top:3px; }
 
   .history-stats{ display:flex; border-bottom:1px solid var(--border); }
   .history-stat{ flex:1; padding:16px 14px; text-align:center; }
@@ -164,6 +203,12 @@
   .saved-actions .time-adjust-btn.load-btn{ border-color:var(--primary); color:var(--primary); }
   .saved-actions .time-adjust-btn.remove-btn{ border-color:var(--destructive); color:var(--destructive); }
   .save-btn.saved{ border-color:var(--primary); }
+
+  .rename-row{ display:flex; gap:10px; margin-top:10px; }
+  .rename-input{ flex:1; min-height:38px; padding:0 10px; background:var(--secondary); border:1px solid var(--border); color:var(--fg); font-size:12px; font-family:inherit; }
+  .rename-input:focus{ outline:none; border-color:var(--primary); }
+  .rename-row .time-adjust-btn{ flex:0 0 auto; padding:0 16px; }
+  .rename-row .time-adjust-btn.rename-confirm-btn{ border-color:var(--primary); color:var(--primary); }
 
   /* ---------- Movement Library ---------- */
   .library-search{ padding:14px; border-bottom:1px solid var(--border); }
@@ -236,16 +281,19 @@
       <div class="eyebrow">PERSONAL SESSION BUILDER / 01</div>
       <div class="hero-title">MAKE IT<br/><span class="hero-accent">COUNT.</span></div>
       <p class="hero-copy">Set your duration, level, and equipment. We generate the session &mdash; swap anything you don&rsquo;t want.</p>
-      <div class="hero-rule"><span class="hero-rule-text">15 OR 20 MINUTES</span><div class="rule-line"></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-heading"><span class="panel-title">BUILD YOUR SESSION</span><span class="panel-index">01 / 02</span></div>
+      <div class="panel-heading"><span class="panel-title">BUILD YOUR SESSION</span></div>
       <div class="panel-body">
         <div class="control-label">EQUIPMENT</div>
         <div class="duration-row" id="equipment-row"></div>
-        <div class="control-label level-label">SESSION LENGTH</div>
-        <div class="duration-row" id="duration-row"></div>
+        <div class="control-label level-label">SESSION MODE</div>
+        <div class="mode-row" id="mode-row"></div>
+        <div id="duration-section">
+          <div class="control-label level-label">SESSION LENGTH</div>
+          <div class="duration-row" id="duration-row"></div>
+        </div>
         <div class="control-label level-label">MOVEMENT LEVEL &middot; CHOOSE ONE OR MORE</div>
         <div class="level-row" id="level-row"></div>
         <div class="control-label level-label">CATEGORIES &middot; CHOOSE ONE OR MORE</div>
@@ -262,24 +310,23 @@
       <div class="panel-heading">
         <span class="panel-title">YOUR SESSION FLOW</span>
         <div class="icon-btn-row">
-          <span class="panel-meta" id="flow-meta">5 MOVEMENTS &middot; 5 CATEGORIES</span>
-          <button class="icon-btn save-btn" id="save-flow-btn" aria-label="Save this workout" data-testid="button-save-flow"></button>
-          <button class="icon-btn" id="share-btn" aria-label="Copy or share this workout" data-testid="button-share"></button>
+          <button class="icon-btn lg load-flow-btn" id="load-flow-btn" aria-label="Load a saved workout" aria-expanded="false" data-testid="button-load-flow"></button>
+          <button class="icon-btn lg save-btn" id="save-flow-btn" aria-label="Save this workout" data-testid="button-save-flow"></button>
+          <button class="icon-btn lg" id="share-btn" aria-label="Copy or share this workout" data-testid="button-share"></button>
         </div>
       </div>
       <div class="exercise-list" id="exercise-list"></div>
       <div class="amrap-strip">
-        <div><div class="amrap-label">AS MANY QUALITY ROUNDS</div><div class="amrap-label">AS POSSIBLE</div></div>
-        <div class="amrap-value">AMRAP<span class="amrap-duration" id="amrap-duration"> 20 MIN</span></div>
+        <div id="amrap-strip-copy"><div class="amrap-label">AS MANY QUALITY ROUNDS</div><div class="amrap-label">AS POSSIBLE</div></div>
+        <div class="amrap-value" id="amrap-strip-value">AMRAP</div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="panel" id="session-timer-panel">
       <div class="panel-heading">
         <span class="panel-title">SESSION TIMER</span>
         <div class="icon-btn-row">
-          <span class="panel-meta" id="timer-meta">20 MIN</span>
-          <button class="icon-btn mute-btn" id="mute-btn" aria-label="Mute sound" data-testid="button-mute"></button>
+          <button class="icon-btn lg mute-btn" id="mute-btn" aria-label="Mute sound" data-testid="button-mute"></button>
         </div>
       </div>
       <div class="timer-body">
@@ -310,6 +357,31 @@
         </button>
       </div>
     </div>
+
+    <div class="panel" id="round-tracker-panel" hidden>
+      <div class="panel-heading">
+        <span class="panel-title">ROUND TRACKER</span>
+      </div>
+      <div class="rt-body-wrap">
+        <div class="rt-active" id="rt-active">
+          <div class="rt-count" id="rt-count-wrap">
+            <span class="rt-count-num" id="rt-count-num">0</span><span class="rt-count-of">/ 4</span>
+          </div>
+          <div class="rt-label">ROUNDS COMPLETE</div>
+          <button class="rt-undo" id="rt-undo" hidden data-testid="button-round-undo">TAP COUNT TO UNDO</button>
+          <button class="rt-finish-btn" id="rt-finish-btn" data-testid="button-round-finish">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#161914" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <span id="rt-finish-text">ROUND 1 FINISHED</span>
+          </button>
+        </div>
+        <div class="rt-done" id="rt-done" hidden>
+          <div class="rt-done-badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L20 7" stroke="#161914" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="rt-done-label" id="rt-done-label">4 / 4 ROUNDS COMPLETE</div>
+          <div class="rt-done-sub">Nice work. Session logged.</div>
+          <button class="rt-done-btn" id="rt-restart-btn" data-testid="button-round-restart">START A NEW SESSION</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="view-history" hidden>
@@ -317,11 +389,10 @@
       <div class="eyebrow">TRACK YOUR PROGRESS / 02</div>
       <div class="hero-title">YOUR<br/><span class="hero-accent">HISTORY.</span></div>
       <p class="hero-copy">Every completed session is logged here, with your streak and totals.</p>
-      <div class="hero-rule"><span class="hero-rule-text">YOUR COMPLETED SESSIONS</span><div class="rule-line"></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-heading"><span class="panel-title">SESSION HISTORY</span><span class="panel-meta" id="history-meta">0 SESSIONS</span></div>
+      <div class="panel-heading"><span class="panel-title">SESSION HISTORY</span></div>
       <div class="history-stats">
         <div class="history-stat"><div class="history-stat-value" id="streak-value">0</div><div class="history-stat-label">DAY STREAK</div></div>
         <div class="history-stat"><div class="history-stat-value" id="total-value">0</div><div class="history-stat-label">TOTAL SESSIONS</div></div>
@@ -348,11 +419,10 @@
       <div class="eyebrow">YOUR FAVORITES / 03</div>
       <div class="hero-title">WORKOUTS<br/><span class="hero-accent">YOU LOVE.</span></div>
       <p class="hero-copy">Save a flow you like and load it back into the generator any time.</p>
-      <div class="hero-rule"><span class="hero-rule-text">YOUR SAVED FLOWS</span><div class="rule-line"></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-heading"><span class="panel-title">SAVED WORKOUTS</span><span class="panel-meta" id="saved-meta">0 SAVED</span></div>
+      <div class="panel-heading"><span class="panel-title">SAVED WORKOUTS</span></div>
       <div class="history-list" id="saved-list"></div>
     </div>
   </div>
@@ -362,11 +432,10 @@
       <div class="eyebrow">MOVEMENT LIBRARY / 04</div>
       <div class="hero-title">LEARN<br/><span class="hero-accent">THE MOVE.</span></div>
       <p class="hero-copy">Every movement in the app, with setup, step-by-step execution, and common mistakes to avoid.</p>
-      <div class="hero-rule"><span class="hero-rule-text">SETUP &middot; EXECUTION &middot; MISTAKES</span><div class="rule-line"></div></div>
     </div>
 
     <div class="panel">
-      <div class="panel-heading"><span class="panel-title">MOVEMENT LIBRARY</span><span class="panel-meta" id="library-meta">66 MOVEMENTS</span></div>
+      <div class="panel-heading"><span class="panel-title">MOVEMENT LIBRARY</span></div>
       <div class="library-search">
         <input class="library-search-input" id="library-search-input" type="text" placeholder="Search movements&hellip;" data-testid="input-library-search" />
       </div>
@@ -382,13 +451,24 @@
 
 </div>
 
+<div class="load-flow-backdrop" id="load-flow-backdrop" hidden></div>
+<div class="load-flow-sheet" id="load-flow-sheet" hidden role="dialog" aria-label="Load a saved workout">
+  <div class="load-flow-sheet-head">
+    <span class="load-flow-sheet-title">LOAD A SAVED WORKOUT</span>
+    <button class="icon-btn" id="load-flow-close-btn" aria-label="Close">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5 5 19" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="load-flow-sheet-list" id="load-flow-sheet-list"></div>
+</div>
+
 <script>
 (function(){
   "use strict";
 
   // ---------- Exercise data ----------
   var LEVELS = ['Beginner','Intermediate','Advanced'];
-  var CATEGORIES = ['Hinges','Squats','Presses','Rows','Core'];
+  var CATEGORIES = ['Hinges','Squats','Presses','Rows','Carries','Core'];
 
   var EXERCISES = [
     { name:'Kettlebell Deadlift', difficulty:'Beginner', category:'Hinges', description:'Standard two-handed hinge lifting the bell from between your feet.', pattern:'hinge', setup:'Stand with feet hip-to-shoulder width, kettlebell on the floor a few inches in front of your shins.', steps:['Push your hips back and hinge forward, keeping your spine neutral and shins close to vertical.', 'Grip the handle with both hands, pull your shoulders back and down, and take the slack out of your arms.', 'Drive through your whole foot and snap your hips forward to stand tall, squeezing your glutes at the top.', 'Reverse the motion under control, hips back first, to return the bell to the floor.'], mistakes:['Rounding the lower back instead of hinging at the hips.', 'Squatting the weight up (knees traveling far forward) instead of hinging.', 'Yanking the bell off the floor instead of pulling the slack out first.'] },
@@ -398,65 +478,70 @@
     { name:'Kettlebell Good Morning', difficulty:'Beginner', category:'Hinges', description:'Bell at the chest, hinging forward at the hips with a flat back and soft knees to stretch and warm up the hamstrings.', pattern:'hinge', setup:'Hold the bell at your chest with both hands, feet hip-width apart, soft knees.', steps:['Keeping the bell locked to your chest, hinge forward at the hips with a flat back.', 'Lower until you feel a stretch through your hamstrings, not until your back rounds.', 'Drive your hips forward to return to standing.'], mistakes:['Bending at the waist/spine instead of the hips.', 'Letting the knees bend more and more until it turns into a squat.'] },
     { name:'Kettlebell Bridge', difficulty:'Beginner', category:'Hinges', description:'Lying on back with bell on hips, driving hips upward.', pattern:'floor', setup:'Lie on your back, knees bent, feet flat on the floor, kettlebell resting on your hips.', steps:['Brace your core and press through your heels to drive your hips up toward the ceiling.', 'Squeeze your glutes hard at the top — avoid overarching the lower back.', 'Lower under control back to the floor.'], mistakes:['Pushing through the toes instead of the heels.', 'Hyperextending the lower back at the top instead of finishing with the glutes.'] },
     { name:'Two-Handed Kettlebell Swing', difficulty:'Beginner', category:'Hinges', description:'The foundational ballistic hip-hinge: hike the bell back, then snap the hips forward to float it to chest height. Power comes from the hips, not the arms.', pattern:'swing', setup:'Stand with feet a bit wider than shoulder width, kettlebell on the floor about a foot in front of you.', steps:['Hike the bell back between your legs like snapping a football, hinging at the hips.', 'Explosively drive your hips forward, standing up tall — the arms just steer, they don’t lift.', 'Let the bell float to roughly chest height as your hips fully extend, then let gravity bring it back down.', 'Absorb the bell on the way down by hinging back into the next hike pass.'], mistakes:['Squatting the swing instead of hinging (knees bending too much, hips not driving).', 'Using the arms and shoulders to muscle the bell up instead of hip drive.', 'Letting the lower back round at the bottom of the hike pass.'] },
-    { name:'Single-Arm Kettlebell Swing', difficulty:'Intermediate', category:'Hinges', description:'Swing performed with only one hand.', pattern:'swing', setup:'Same athletic hinge stance as the two-handed swing, gripping the bell in one hand.', steps:['Hike the bell back between your legs, keeping your shoulders square to the front.', 'Snap your hips forward explosively; let the working arm stay relaxed and simply ride the momentum.', 'Brace your core to resist rotating toward the loaded side.', 'Switch hands only at the top of the swing or between reps, not mid-arc.'], mistakes:['Letting the torso rotate open toward the working arm.', 'Gripping the handle too tightly, which creeps tension up into the shoulder.'] },
+    { name:'Single-Arm Kettlebell Swing', difficulty:'Beginner', category:'Hinges', description:'Swing performed with only one hand.', pattern:'swing', setup:'Same athletic hinge stance as the two-handed swing, gripping the bell in one hand.', steps:['Hike the bell back between your legs, keeping your shoulders square to the front.', 'Snap your hips forward explosively; let the working arm stay relaxed and simply ride the momentum.', 'Brace your core to resist rotating toward the loaded side.', 'Complete all your reps on one arm before switching hands for the next set, rather than passing the bell mid-set.'], mistakes:['Letting the torso rotate open toward the working arm.', 'Gripping the handle too tightly, which creeps tension up into the shoulder.'] },
     { name:'Hand-to-Hand Swing', difficulty:'Intermediate', category:'Hinges', description:'Alternating hands at the apex of the swing.', pattern:'swing', setup:'Start a single-arm swing stance, ready to pass the bell between hands at the top of the arc.', steps:['Perform the hike pass and hip snap exactly as a single-arm swing.', 'At the top of the float, release with one hand and receive with the other without breaking rhythm.', 'Keep the hips squared throughout the hand switch — don’t let the pass twist your torso.'], mistakes:['Reaching across the body to grab the handle, twisting the spine.', 'Slowing the hips down to make the switch easier, losing the ballistic power of the swing.'] },
-    { name:'Double Kettlebell Swing', difficulty:'Intermediate', category:'Hinges', description:'Swinging two bells simultaneously with a wider stance.', pattern:'swing', setup:'Wider stance than a single-bell swing, one kettlebell hiked back between your legs in each hand.', steps:['Hike both bells back together, hinging at the hips with a flat back.', 'Drive your hips forward in one explosive motion to float both bells to chest height.', 'Keep both arms even — avoid one bell leading the other.'], mistakes:['Using a stance too narrow for two bells to pass without hitting your legs.', 'Letting one side dominate the drive, twisting the hips.'] },
-    { name:'Figure 8s', difficulty:'Intermediate', category:'Hinges', description:'Passing the bell hand-to-hand through legs in a figure-8 motion.', pattern:'rotate', setup:'Stand in a quarter-squat with the bell in one hand, knees bent enough to pass the bell underneath them.', steps:['Pass the bell behind one leg to the other hand, weaving it in a figure-8 path through and around your legs.', 'Keep your chest up and back flat throughout — the movement comes from the arms and a stable squat, not the spine.', 'Keep the pace controlled so the handoff between hands is clean each time.'], mistakes:['Standing too tall, which makes the bell path awkward and cramped.', 'Rounding the back to reach for the handoff.'] },
+    { name:'Double Kettlebell Swing', difficulty:'Intermediate', category:'Hinges', description:'Swinging two bells simultaneously with a wider stance.', pattern:'swing', setup:'Wider stance than a single-bell swing, one kettlebell hiked back between your legs in each hand.', steps:['Hike both bells back together, hinging at the hips with a flat back.', 'Drive your hips forward in one explosive motion to float both bells to chest height.', 'Keep both arms even — avoid one bell leading the other.'], mistakes:['Using a stance too narrow for two bells to pass without hitting your legs.', 'Letting one side dominate the drive, twisting the hips.'], requiresTwoBells:true },
+    { name:'Figure 8s', difficulty:'Beginner', category:'Hinges', description:'Passing the bell hand-to-hand through legs in a figure-8 motion.', pattern:'rotate', setup:'Stand in a quarter-squat with the bell in one hand, knees bent enough to pass the bell underneath them.', steps:['Pass the bell behind one leg to the other hand, weaving it in a figure-8 path through and around your legs.', 'Keep your chest up and back flat throughout — the movement comes from the arms and a stable squat, not the spine.', 'Keep the pace controlled so the handoff between hands is clean each time.'], mistakes:['Standing too tall, which makes the bell path awkward and cramped.', 'Rounding the back to reach for the handoff.'] },
     { name:'Kettlebell Clean', difficulty:'Intermediate', category:'Hinges', description:'Pulling from the floor and cleanly catching in the front rack.', pattern:'pull', setup:'Same hike-pass setup as a swing, but with the intent to bring the bell into the rack, not float it out front.', steps:['Hike the bell back and drive your hips forward like a swing.', 'Keep the bell close to your body as it rises, guiding it with a slight elbow bend into the front rack.', 'Let the bell rotate around your hand smoothly to “catch” in the rack without it banging your wrist or forearm.', 'Absorb the catch by softening your knees slightly.'], mistakes:['Muscling the bell up and out and away from the body, which causes it to whack the forearm on the way in.', 'Casting the bell out at the top instead of pulling it in close on the way up.'] },
-    { name:'Kettlebell High Pull', difficulty:'Intermediate', category:'Hinges', description:'Explosive pull ending with elbow high and wide.', pattern:'pull', setup:'Set up as a swing, but the intent is to pull the elbow high and wide rather than let the bell float.', steps:['Hike and hip-drive the bell exactly as in a swing.', 'As the bell rises, pull the elbow up and back, keeping the bell close to your body, like starting a upright row mid-air.', 'Let the bell reach roughly chest-to-collarbone height with your elbow above your wrist.'], mistakes:['Pulling with the arm before the hips have finished driving.', 'Letting the elbow drift out to the side instead of staying close and high.'] },
+    { name:'Kettlebell High Pull', difficulty:'Intermediate', category:'Hinges', description:'Explosive pull ending with the elbow high and close to the body.', pattern:'pull', setup:'Set up as a swing, but the intent is to pull the elbow high and close to the body rather than let the bell float.', steps:['Hike and hip-drive the bell exactly as in a swing.', 'As the bell rises, pull the elbow up and back, keeping the bell close to your body, like starting a upright row mid-air.', 'Let the bell reach roughly chest-to-collarbone height with your elbow above your wrist.'], mistakes:['Pulling with the arm before the hips have finished driving.', 'Letting the elbow drift out to the side instead of staying close and high.'] },
     { name:'Kettlebell Snatch', difficulty:'Advanced', category:'Hinges', description:'Launching the bell from the hinge directly overhead in one fluid arc.', pattern:'snatch', setup:'Set up as a swing with the intent to send the bell directly overhead in one continuous motion.', steps:['Hike the bell back and drive your hips forward with full power.', 'Let the bell travel in a straight vertical path close to your body rather than looping out and around.', 'Punch your hand through the handle at the top so the bell rotates around your fist, not into your wrist.', 'Finish with the bell locked out overhead, arm, hips, and legs all extended in one line.'], mistakes:['Muscling the bell up with the shoulder instead of relying on hip drive.', 'Letting the bell smash into the forearm at the top from a loose grip and bad timing.', 'Catching the lockout with a bent elbow instead of a fully locked arm.'] },
-    { name:'Double Kettlebell Snatch', difficulty:'Advanced', category:'Hinges', description:'Performing the snatch with a bell in each hand.', pattern:'snatch', setup:'Same setup as the single-bell snatch, one kettlebell hiked back in each hand.', steps:['Hike both bells back together and drive your hips forward with equal power on both sides.', 'Let both bells travel straight up close to the body and punch through to lockout together.', 'Land the catch with both arms locked out overhead at the same time.'], mistakes:['One side finishing before the other, throwing off balance at the top.', 'Using a stance too narrow to hike two bells cleanly.'] },
-    { name:'Double Kettlebell High Pull', difficulty:'Advanced', category:'Hinges', description:'Explosively pulling two bells simultaneously high and wide.', pattern:'pull', setup:'Set up as a double swing with the intent to pull both elbows high and wide.', steps:['Hike both bells back and hip-drive together.', 'Pull both elbows up and back symmetrically as the bells rise to chest height.', 'Keep both bells close to the body throughout the pull.'], mistakes:['One arm pulling higher or faster than the other.', 'Letting the bells swing out away from the body instead of tracking straight up.'] },
+    { name:'Double Kettlebell Snatch', difficulty:'Advanced', category:'Hinges', description:'Performing the snatch with a bell in each hand.', pattern:'snatch', setup:'Same setup as the single-bell snatch, one kettlebell hiked back in each hand.', steps:['Hike both bells back together and drive your hips forward with equal power on both sides.', 'Let both bells travel straight up close to the body and punch through to lockout together.', 'Land the catch with both arms locked out overhead at the same time.'], mistakes:['One side finishing before the other, throwing off balance at the top.', 'Using a stance too narrow to hike two bells cleanly.'], requiresTwoBells:true },
+    { name:'Double Kettlebell High Pull', difficulty:'Advanced', category:'Hinges', description:'Explosively pulling two bells simultaneously high and close to the body.', pattern:'pull', setup:'Set up as a double swing with the intent to pull both elbows high and close to the body.', steps:['Hike both bells back and hip-drive together.', 'Pull both elbows up and back symmetrically as the bells rise to chest height.', 'Keep both bells close to the body throughout the pull.'], mistakes:['One arm pulling higher or faster than the other.', 'Letting the bells swing out away from the body instead of tracking straight up.'], requiresTwoBells:true },
     { name:'Rotational Clean', difficulty:'Advanced', category:'Hinges', description:'Cleaning the kettlebell while pivoting and rotating hips 90 degrees.', pattern:'pull', setup:'Set up in an athletic stance with the bell on the floor to one side of your body.', steps:['Hinge and pull the bell up while pivoting your hips and feet roughly 90 degrees toward the bell.', 'Guide the bell into the front rack as your body finishes rotating to face forward.', 'Keep the motion controlled — this is a coordination drill, not a max-effort pull.'], mistakes:['Twisting through the lower back instead of pivoting the feet and hips together.', 'Rushing the rotation before the bell has actually left the floor.'] },
-    { name:'Lateral Kettlebell Swing', difficulty:'Advanced', category:'Hinges', description:'Swing movement moving across the front of the body laterally.', pattern:'swing', setup:'Standard swing hike-pass stance, but aiming the bell’s path out to the side rather than straight forward.', steps:['Hike the bell back as in a normal swing.', 'Drive the hips forward while redirecting the bell’s arc out to one side at chest height.', 'Keep the core braced to control the extra rotational demand on the spine.'], mistakes:['Letting the lower back twist to create the lateral path instead of redirecting through the arms and hips together.', 'Losing the hip-hinge fundamentals while focused on the new direction.'] },
+    { name:'Lateral Kettlebell Swing', difficulty:'Intermediate', category:'Hinges', description:'Swing movement moving across the front of the body laterally.', pattern:'swing', setup:'Standard swing hike-pass stance, but aiming the bell’s path out to the side rather than straight forward.', steps:['Hike the bell back as in a normal swing.', 'Drive the hips forward while redirecting the bell’s arc out to one side at chest height.', 'Keep the core braced to control the extra rotational demand on the spine.'], mistakes:['Letting the lower back twist to create the lateral path instead of redirecting through the arms and hips together.', 'Losing the hip-hinge fundamentals while focused on the new direction.'] },
     { name:'Kettlebell Goblet Squat', difficulty:'Beginner', category:'Squats', description:'Holding the bell by the horns at chest height during a deep squat.', pattern:'squat', setup:'Hold the bell by the horns (upside-down against your chest), feet just outside shoulder width.', steps:['Keep your elbows pointed down, tracking just inside your knees as you descend.', 'Sit down and back, keeping your chest tall and heels planted.', 'Squat as deep as your mobility allows, using your elbows against your knees as a gentle guide, then drive back up.'], mistakes:['Letting the heels lift off the floor.', 'Letting the knees cave inward on the way up.', 'Rounding the upper back to keep the bell close.'] },
     { name:'Kettlebell Sumo Squat', difficulty:'Beginner', category:'Squats', description:'Wide stance, toes turned out, squatting with the bell hanging between your legs. Targets adductors and glutes.', pattern:'squat', setup:'Wide stance, toes turned out about 30-45 degrees, kettlebell hanging from both hands between your legs.', steps:['Sit straight down, tracking your knees over your toes.', 'Keep your chest tall and the bell hanging with straight arms, not swinging.', 'Drive through your whole foot to stand, squeezing your glutes and inner thighs at the top.'], mistakes:['Losing the wide stance and squatting narrow.', 'Letting the bell swing rather than staying under control.'] },
     { name:'Kettlebell Forward Lunge', difficulty:'Beginner', category:'Squats', description:'Holding the bell in goblet or rack position, stepping forward into a lunge and pushing back to standing, alternating legs.', pattern:'lunge', setup:'Hold the bell in goblet or single-arm rack position, standing tall.', steps:['Step forward with one leg and lower your back knee straight down toward the floor.', 'Keep your front shin close to vertical and your torso upright.', 'Push off your front foot to return to standing, then alternate legs.'], mistakes:['Letting the front knee travel far past the toes.', 'Taking a step too short, which pitches the torso forward.'] },
-    { name:'Racked Squat', difficulty:'Intermediate', category:'Squats', description:'Squatting with one bell held in the single-arm front rack.', pattern:'squat', setup:'Clean one kettlebell into the front rack, resting it against your shoulder and chest.', steps:['Keep your elbow tucked and the bell resting on your forearm/shoulder shelf, not held out by the arm.', 'Squat straight down, resisting the urge to lean toward the loaded side.', 'Drive back up, keeping the rack tight through the whole rep.'], mistakes:['Letting the torso tip toward the loaded shoulder.', 'Letting the elbow drift away from the body, which turns the rack into an arm-strength exercise.'] },
-    { name:'Double Front Squat', difficulty:'Intermediate', category:'Squats', description:'Squatting with two bells held in the front rack position.', pattern:'squat', setup:'Clean two kettlebells into the front rack, one at each shoulder.', steps:['Keep both elbows tucked in and the bells resting on your shoulders, not just held by your arms.', 'Squat straight down with a tall chest, knees tracking over your toes.', 'Drive up powerfully through your whole foot.'], mistakes:['Letting the elbows drop, which shifts the load onto the wrists and forearms.', 'Leaning forward because the front-loaded weight pulls the chest down.'] },
+    { name:'Racked Squat', difficulty:'Beginner', category:'Squats', description:'Squatting with one bell held in the single-arm front rack.', pattern:'squat', setup:'Clean one kettlebell into the front rack, resting it against your shoulder and chest.', steps:['Keep your elbow tucked and the bell resting on your forearm/shoulder shelf, not held out by the arm.', 'Squat straight down, resisting the urge to lean toward the loaded side.', 'Drive back up, keeping the rack tight through the whole rep.'], mistakes:['Letting the torso tip toward the loaded shoulder.', 'Letting the elbow drift away from the body, which turns the rack into an arm-strength exercise.'] },
+    { name:'Double Front Squat', difficulty:'Intermediate', category:'Squats', description:'Squatting with two bells held in the front rack position.', pattern:'squat', setup:'Clean two kettlebells into the front rack, one at each shoulder.', steps:['Keep both elbows tucked in and the bells resting on your shoulders, not just held by your arms.', 'Squat straight down with a tall chest, knees tracking over your toes.', 'Drive up powerfully through your whole foot.'], mistakes:['Letting the elbows drop, which shifts the load onto the wrists and forearms.', 'Leaning forward because the front-loaded weight pulls the chest down.'], requiresTwoBells:true },
     { name:'Racked Reverse Lunge', difficulty:'Intermediate', category:'Squats', description:'Stepping back into a lunge with bell in front rack.', pattern:'lunge', setup:'Clean one bell into the front rack, standing tall.', steps:['Step backward with one leg, lowering the back knee straight down.', 'Keep your torso upright and the rack tight through the whole step.', 'Push through your front heel to return to standing.'], mistakes:['Letting the torso lean toward the loaded side to counterbalance.', 'Taking a step too short to lower the back knee properly.'] },
     { name:'Tactical Lunge', difficulty:'Intermediate', category:'Squats', description:'Passing the bell hand-to-hand underneath front leg while lunging.', pattern:'lunge', setup:'Stand holding the bell in one hand, ready to pass it under your front leg mid-lunge.', steps:['Step forward into a lunge, lowering your back knee toward the floor.', 'At the bottom, pass the bell underneath your front thigh to the other hand.', 'Drive back up to standing and repeat, alternating the leg and the passing hand.'], mistakes:['Rounding the back to reach the handoff instead of keeping the torso tall.', 'Rushing the pass and losing balance at the bottom of the lunge.'] },
     { name:'Kettlebell Curtsy Lunge', difficulty:'Intermediate', category:'Squats', description:'Holding the bell in goblet or rack position, stepping one leg diagonally behind the other into a curtsy, then returning to standing. Targets glutes and adductors.', pattern:'lunge', setup:'Hold the bell in goblet or rack position, standing tall.', steps:['Step one leg diagonally behind the other, lowering into a curtsy until your back knee nears the floor.', 'Keep your hips square to the front rather than letting them rotate with the step.', 'Push through your front foot to return to standing.'], mistakes:['Letting the front knee collapse inward.', 'Rotating the hips instead of keeping them squared forward.'] },
     { name:'Cossack Squat', difficulty:'Advanced', category:'Squats', description:'Deep lateral lunge holding the bell at the chest.', pattern:'lunge', setup:'Very wide stance, toes pointed slightly out, holding the bell at your chest.', steps:['Shift your weight to one side, bending that knee deeply while the other leg stays straight, heel down if possible.', 'Keep your chest up and your bent-side heel planted through the movement.', 'Push off the bent leg to shift your weight back to center, then repeat on the other side.'], mistakes:['Letting the bent-knee heel pop up off the floor.', 'Rounding forward at the chest instead of sitting back into the hip.'] },
     { name:'Deck Squat', difficulty:'Advanced', category:'Squats', description:'Rolling back onto shoulders, then rolling forward to stand into a squat.', pattern:'floor', setup:'Sit on the floor holding the bell at your chest, knees bent, feet flat.', steps:['Roll back onto your upper back and shoulders, keeping the bell tight to your chest.', 'Use the momentum of rolling forward to drive your feet down and stand straight up out of the roll.', 'Control the roll back down onto the floor to reset.'], mistakes:['Rolling onto the neck instead of the upper back/shoulders, which is hard on the spine.', 'Trying to muscle up without using the rolling momentum.'] },
     { name:'Kettlebell Pistol Squat', difficulty:'Advanced', category:'Squats', description:'Single-leg squat with the other leg extended straight out in front, holding a bell in goblet or rack position for balance.', pattern:'squat', setup:'Stand on one leg holding the bell in goblet or extended-arm counterbalance position, other leg extended forward.', steps:['Sit back and down on the standing leg, keeping the extended leg hovering off the floor.', 'Go only as deep as you can control with good form — a partial range is fine while building strength.', 'Drive through the standing heel to return to tall.'], mistakes:['Letting the standing knee cave inward.', 'Going deeper than current strength/mobility allows and losing the bottom position.'] },
-    { name:'Overhead Squat', difficulty:'Advanced', category:'Squats', description:'Squatting while keeping one or two bells locked out overhead.', pattern:'squat', setup:'Press or snatch a bell to lockout overhead before beginning, feet shoulder width.', steps:['Keep the arm locked and the bell stacked directly over your shoulder and hip throughout.', 'Squat down while keeping your eyes forward and the overhead arm vertical.', 'Drive back up without letting the bell drift forward or the elbow bend.'], mistakes:['Letting the arm drift out of the locked, stacked position as you descend.', 'Rushing into depth before you can keep the bell stable overhead.'] },
+    { name:'Overhead Squat', difficulty:'Advanced', category:'Squats', description:'Squatting while keeping a kettlebell locked out overhead with a straight arm.', pattern:'squat', setup:'Press or snatch a bell to lockout overhead before beginning, feet shoulder width.', steps:['Keep the arm locked and the bell stacked directly over your shoulder and hip throughout.', 'Squat down while keeping your eyes forward and the overhead arm vertical.', 'Drive back up without letting the bell drift forward or the elbow bend.'], mistakes:['Letting the arm drift out of the locked, stacked position as you descend.', 'Rushing into depth before you can keep the bell stable overhead.'] },
     { name:'Kettlebell Floor Press', difficulty:'Beginner', category:'Presses', description:'Lying on back and pressing bell upward.', pattern:'floor', setup:'Lie on your back with knees bent, holding the bell at your chest with a locked wrist.', steps:['Press the bell straight up until your arm is fully locked out over your shoulder.', 'Lower with control until your upper arm touches the floor — let the floor stop the rep, don’t bounce.', 'Keep your wrist stacked directly over your elbow throughout the press.'], mistakes:['Flaring the elbow out to the side instead of pressing in a straight line.', 'Bouncing the upper arm off the floor to gain momentum.'] },
-    { name:'Strict Overhead Press', difficulty:'Intermediate', category:'Presses', description:'Pressing from the rack directly overhead without leg drive.', pattern:'press', setup:'Clean the bell into the front rack, feet about hip width, standing tall.', steps:['Brace your core and glutes hard before starting — no leg drive is allowed.', 'Press straight up, letting your head move slightly back out of the bell’s path, then forward once it clears.', 'Finish with the bell, wrist, elbow, and shoulder stacked directly overhead.', 'Lower back to the rack under control.'], mistakes:['Leaning back excessively to press instead of bracing and pressing straight up.', 'Letting the bell drift forward instead of finishing stacked over the shoulder.'] },
+    { name:'Strict Overhead Press', difficulty:'Beginner', category:'Presses', description:'Pressing from the rack directly overhead without leg drive.', pattern:'press', setup:'Clean the bell into the front rack, feet about hip width, standing tall.', steps:['Brace your core and glutes hard before starting — no leg drive is allowed.', 'Press straight up, letting your head move slightly back out of the bell’s path, then forward once it clears.', 'Finish with the bell, wrist, elbow, and shoulder stacked directly overhead.', 'Lower back to the rack under control.'], mistakes:['Leaning back excessively to press instead of bracing and pressing straight up.', 'Letting the bell drift forward instead of finishing stacked over the shoulder.'] },
     { name:'Push Press', difficulty:'Intermediate', category:'Presses', description:'Using a slight leg dip and drive to help push overhead.', pattern:'press', setup:'Clean the bell into the front rack, feet hip width.', steps:['Dip straight down a few inches by bending your knees, keeping your torso upright.', 'Drive up explosively through your legs and use that momentum to punch the bell overhead.', 'Lock the arm out fully at the top, then lower back to the rack.'], mistakes:['Dipping forward instead of straight down, which sends the bell off-path.', 'Relying entirely on the arm and skipping the leg drive that makes this press efficient.'] },
     { name:'Half-Kneeling Press', difficulty:'Intermediate', category:'Presses', description:'Pressing overhead from a half-kneeling position, with one knee down and the opposite foot planted.', pattern:'press', setup:'Kneel with one knee down, the opposite foot planted flat in front, bell racked on the same side as the down knee.', steps:['Squeeze your glutes on both sides to lock your hips square and stable.', 'Press straight up without leaning to either side or arching your lower back.', 'Lower back to the rack with control, keeping the tall, stable torso.'], mistakes:['Letting the hips rotate or tilt during the press.', 'Arching the lower back to gain a few extra inches of press.'] },
     { name:'Single-Arm Thruster', difficulty:'Intermediate', category:'Presses', description:'Front squat transitioning instantly into a push press.', pattern:'thruster', setup:'Clean the bell into the front rack, feet just outside shoulder width.', steps:['Squat down while keeping the rack tight and your chest tall.', 'As you drive up out of the bottom of the squat, use that momentum to press the bell overhead in one continuous motion.', 'Finish with hips, knees, and the pressing arm all fully extended.'], mistakes:['Pausing between the squat and the press instead of linking them into one motion.', 'Letting the torso lean away from the loaded side during the press.'] },
-    { name:'Single-Arm Clean & Press', difficulty:'Intermediate', category:'Presses', description:'Clean from the floor directly into an overhead press.', pattern:'pull', setup:'Set up as for a clean, with the intent to press immediately once the bell reaches the rack.', steps:['Clean the bell into the front rack using hip drive, not an arm curl.', 'Reset your breath and brace, then press straight overhead to lockout.', 'Lower back to the rack, then all the way back down to the floor or hang, and repeat.'], mistakes:['Curling the bell up into the rack with the arm instead of using the hip pull.', 'Pressing before you’ve actually stabilized the rack position.'] },
+    { name:'Single-Arm Clean & Press', difficulty:'Intermediate', category:'Presses', description:'Clean the bell to the rack, then press it overhead in a separate, controlled phase.', pattern:'pull', setup:'Set up as for a clean; pause to reset and brace once the bell reaches the rack, then press.', steps:['Clean the bell into the front rack using hip drive, not an arm curl.', 'Reset your breath and brace, then press straight overhead to lockout.', 'Lower back to the rack, then all the way back down to the floor or hang, and repeat.'], mistakes:['Curling the bell up into the rack with the arm instead of using the hip pull.', 'Pressing before you’ve actually stabilized the rack position.'] },
     { name:'Kettlebell Jerk', difficulty:'Advanced', category:'Presses', description:'A quick leg dip-drive sends the bell upward, then a second dip drops you under it to catch overhead with a locked arm.', pattern:'jerk', setup:'Start with the bell in the front rack, feet hip width.', steps:['Dip straight down a few inches, then drive up hard to send the bell just off your shoulder.', 'As the bell reaches its highest point, quickly drop your hips down and back under it, catching it locked out overhead with feet shifted to a comfortable split or shoulder-width stance.', 'Stand tall to finish, then reverse the steps to return the bell to the rack.'], mistakes:['Pressing the bell up with the arm instead of dip-driving it with the legs.', 'Catching with a bent elbow instead of a fully locked-out arm.'] },
-    { name:'Double Clean & Jerk', difficulty:'Advanced', category:'Presses', description:'Clean two bells to the rack, then jerk them overhead.', pattern:'jerk', setup:'Clean two bells into the front rack together, feet hip width.', steps:['Dip straight down with both bells racked evenly, then drive up to send both bells slightly upward.', 'Drop under both bells at once, catching them locked out overhead with feet re-set for stability.', 'Stand tall to finish, keeping both arms even.'], mistakes:['One bell finishing higher or later than the other.', 'Uneven foot re-set under the bells, throwing off balance at the catch.'] },
+    { name:'Double Clean & Jerk', difficulty:'Advanced', category:'Presses', description:'Clean two bells to the rack, then jerk them overhead.', pattern:'jerk', setup:'Clean two bells into the front rack together, feet hip width.', steps:['Dip straight down with both bells racked evenly, then drive up to send both bells slightly upward.', 'Drop under both bells at once, catching them locked out overhead with feet re-set for stability.', 'Stand tall to finish, keeping both arms even.'], mistakes:['One bell finishing higher or later than the other.', 'Uneven foot re-set under the bells, throwing off balance at the catch.'], requiresTwoBells:true },
     { name:'Sots Press', difficulty:'Advanced', category:'Presses', description:'Strict overhead press while holding a deep squat.', pattern:'press', setup:'Squat all the way down holding the bell in the rack, staying in the bottom position for the whole set.', steps:['From the bottom of the squat, press the bell straight overhead without standing up.', 'Keep your torso as upright as possible in the bottom position throughout the press.', 'Lower back to the rack while staying in the squat.'], mistakes:['Standing up partway to make the press easier — the point is pressing from the bottom.', 'Letting the torso collapse forward in the deep squat position.'] },
     { name:'Bottoms-Up Press', difficulty:'Advanced', category:'Presses', description:'Pressing overhead while holding the bell upside down by the handle.', pattern:'press', setup:'Hold the bell upside down by the handle, base pointing at the ceiling, gripped hard.', steps:['Squeeze the handle as hard as you can — grip tension is what keeps the bell from tipping.', 'Press straight up slowly and with control, keeping the base stacked over your wrist.', 'Lower with the same control, never letting the bell wobble out of vertical.'], mistakes:['Gripping too loosely, which lets the bell tip over.', 'Rushing the press instead of moving slowly enough to keep the bell balanced.'] },
-    { name:'Double Kettlebell Thruster', difficulty:'Advanced', category:'Presses', description:'Heavy double front squat into double overhead press.', pattern:'thruster', setup:'Clean two bells into the front rack, feet just outside shoulder width.', steps:['Squat down with both bells racked, chest tall.', 'Drive up out of the bottom and use that momentum to press both bells overhead together.', 'Finish with hips, knees, and both arms fully extended.'], mistakes:['One arm lagging behind the other during the press.', 'Breaking the squat and press into two separate paused movements instead of one fluid one.'] },
-    { name:'See-Saw Press', difficulty:'Advanced', category:'Presses', description:'Holding two bells in rack, pressing one up while pulling the other down.', pattern:'press', setup:'Clean two bells into the front rack.', steps:['Press one bell overhead while simultaneously lowering the other back to the rack.', 'Keep your core braced to resist rotating as the bells move in opposite directions.', 'Alternate smoothly, one bell always moving up as the other comes down.'], mistakes:['Letting the torso twist to help the press instead of staying braced and square.', 'Losing rhythm and pausing with both bells at the same height.'] },
+    { name:'Double Kettlebell Thruster', difficulty:'Advanced', category:'Presses', description:'Heavy double front squat into double overhead press.', pattern:'thruster', setup:'Clean two bells into the front rack, feet just outside shoulder width.', steps:['Squat down with both bells racked, chest tall.', 'Drive up out of the bottom and use that momentum to press both bells overhead together.', 'Finish with hips, knees, and both arms fully extended.'], mistakes:['One arm lagging behind the other during the press.', 'Breaking the squat and press into two separate paused movements instead of one fluid one.'], requiresTwoBells:true },
+    { name:'See-Saw Press', difficulty:'Advanced', category:'Presses', description:'Holding two bells in rack, pressing one up while pulling the other down.', pattern:'press', setup:'Clean two bells into the front rack.', steps:['Press one bell overhead while simultaneously lowering the other back to the rack.', 'Keep your core braced to resist rotating as the bells move in opposite directions.', 'Alternate smoothly, one bell always moving up as the other comes down.'], mistakes:['Letting the torso twist to help the press instead of staying braced and square.', 'Losing rhythm and pausing with both bells at the same height.'], requiresTwoBells:true },
     { name:'Single-Arm Kettlebell Row', difficulty:'Beginner', category:'Rows', description:'Bent-over row pulling to the hip.', pattern:'row', setup:'Hinge forward at the hips, flat back, bell hanging from one hand.', steps:['Brace your core to keep your torso still and square to the floor.', 'Pull your elbow straight up and back, driving it past your ribs, bell finishing near your hip.', 'Lower with control back to a full arm extension.'], mistakes:['Rotating the torso to help the pull instead of keeping it square.', 'Shrugging the shoulder up toward the ear instead of driving the elbow back.'] },
-    { name:'Double Kettlebell Bent-Over Row', difficulty:'Beginner', category:'Rows', description:'Hinging forward and rowing two bells to the hips at the same time, keeping a flat back throughout.', pattern:'row', setup:'Hinge forward at the hips with a flat back, one bell hanging from each hand.', steps:['Brace your core hard — this position is demanding on the lower back.', 'Pull both elbows straight up and back together, bells finishing near your hips.', 'Lower both with control back to full extension without letting the back round.'], mistakes:['Letting the back round under the load of two bells.', 'Standing the torso up a bit more each rep to make the pull easier ("cheating" the hinge).'] },
+    { name:'Double Kettlebell Bent-Over Row', difficulty:'Beginner', category:'Rows', description:'Hinging forward and rowing two bells to the hips at the same time, keeping a flat back throughout.', pattern:'row', setup:'Hinge forward at the hips with a flat back, one bell hanging from each hand.', steps:['Brace your core hard — this position is demanding on the lower back.', 'Pull both elbows straight up and back together, bells finishing near your hips.', 'Lower both with control back to full extension without letting the back round.'], mistakes:['Letting the back round under the load of two bells.', 'Standing the torso up a bit more each rep to make the pull easier ("cheating" the hinge).'], requiresTwoBells:true },
     { name:'Kettlebell Upright Row', difficulty:'Beginner', category:'Rows', description:'Pulling the bell straight up along your body to chest height, leading with the elbows.', pattern:'row', setup:'Stand tall holding the bell with both hands in front of your thighs.', steps:['Pull the bell straight up along your body, leading with your elbows.', 'Let your elbows travel out and up above wrist height, bell finishing around chest/collarbone height.', 'Lower with control back to the starting position.'], mistakes:['Pulling the bell out away from the body instead of straight up along it.', 'Shrugging instead of leading with the elbows.'] },
     { name:'Tactical Row', difficulty:'Intermediate', category:'Rows', description:'Rowing the bell to your hip from a staggered, athletic stance — one foot forward, one back — building rotational core stability alongside pulling strength.', pattern:'row', setup:'Staggered stance, one foot forward, one back, hinged slightly forward, bell hanging from one hand.', steps:['Brace your core to resist rotating in the staggered stance.', 'Pull your elbow straight up and back, bell finishing near your hip.', 'Lower with control, keeping the athletic, staggered base stable throughout.'], mistakes:['Letting the back leg’s heel pop up and destabilize the stance.', 'Rotating the torso toward the working arm instead of staying square.'] },
-    { name:'Gorilla Row', difficulty:'Beginner', category:'Rows', description:'Alternating rows from a deep hinge with two bells on the floor.', pattern:'row', setup:'Deep hinge with two bells on the floor between your feet, gripping both handles.', steps:['Keeping one hand down for support, pull the other bell straight up to your hip.', 'Set that bell back down with control, then repeat on the other side.', 'Keep your back flat throughout — the deep hinge makes this demanding on the low back if it rounds.'], mistakes:['Rounding the back in the deep hinge position.', 'Rushing the alternating tempo and losing control of the set-down.'] },
-    { name:'Kettlebell Pullover', difficulty:'Beginner', category:'Rows', description:'Lying on your back with knees bent, lowering the bell in an arc from overhead to above your chest to engage the lats and core.', pattern:'floor', setup:'Lie on your back with knees bent, holding the bell with both hands extended above your chest.', steps:['Keeping your arms mostly straight, lower the bell in an arc back behind your head.', 'Brace your core to keep your lower back from arching off the floor.', 'Reverse the arc, pulling the bell back over your chest using your lats.'], mistakes:['Letting the lower back arch up off the floor as the bell goes overhead.', 'Bending the elbows a lot, which turns it into a triceps movement instead of a lat stretch/pull.'] },
-    { name:'Kettlebell Renegade Row', difficulty:'Intermediate', category:'Rows', description:'Planking on two bells and alternating rows.', pattern:'row', setup:'Plank position with one hand on each kettlebell handle, feet set wide for stability.', steps:['Brace your core and glutes hard to keep your hips from rocking side to side.', 'Pull one bell straight up to your hip while the other arm stays locked, supporting your weight.', 'Set it down with control, then row the other side.'], mistakes:['Letting the hips rotate open toward the rowing arm.', 'Rushing the tempo, which turns the plank into a wobble.'] },
-    { name:'Kettlebell Batwing Hold', difficulty:'Intermediate', category:'Rows', description:'Holding two bells in a static rack position with shoulder blades pinched together, building upper-back and grip endurance.', pattern:'row', setup:'Bent over at the hips with a flat back, holding a bell in each hand pulled up near your ribs.', steps:['Pin your shoulder blades together and hold both bells tight to your body.', 'Keep breathing steadily while maintaining the hinge and the pulled-back shoulder position.', 'Hold for the prescribed time, resisting the urge to let the back round as fatigue sets in.'], mistakes:['Letting the back round as the hold gets hard — better to end the set than lose the flat back.', 'Letting the shoulder blades relax apart instead of staying pinned.'] },
-    { name:'Kettlebell Slingshot', difficulty:'Beginner', category:'Core', description:'Passing the bell hand-to-hand around your waist.', pattern:'rotate', setup:'Stand tall holding the bell in front of your waist with both hands.', steps:['Pass the bell around your waist from one hand to the other, letting it travel behind your back.', 'Keep your core braced and hips facing forward — the bell circles you, not the other way around.', 'Reverse direction after your set to work both sides evenly.'], mistakes:['Letting the torso twist to chase the bell around instead of staying still.', 'Losing grip tension right at the handoff behind the back.'] },
+    { name:'Gorilla Row', difficulty:'Beginner', category:'Rows', description:'Alternating rows from a deep hinge with two bells on the floor.', pattern:'row', setup:'Deep hinge with two bells on the floor between your feet, gripping both handles.', steps:['Keeping one hand down for support, pull the other bell straight up to your hip.', 'Set that bell back down with control, then repeat on the other side.', 'Keep your back flat throughout — the deep hinge makes this demanding on the low back if it rounds.'], mistakes:['Rounding the back in the deep hinge position.', 'Rushing the alternating tempo and losing control of the set-down.'], requiresTwoBells:true },
+    { name:'Kettlebell Pullover', difficulty:'Beginner', category:'Rows', description:'Lying on your back with knees bent, lowering the bell in an arc from overhead to above your chest to engage the lats and core.', pattern:'floor', setup:'Lie on your back with knees bent, holding the bell with both hands extended above your chest.', steps:['Brace your core to keep your lower back from arching off the floor.', 'Keeping your arms mostly straight, lower the bell in an arc back behind your head.', 'Reverse the arc, pulling the bell back over your chest using your lats.'], mistakes:['Letting the lower back arch up off the floor as the bell goes overhead.', 'Bending the elbows a lot, which turns it into a triceps movement instead of a lat stretch/pull.'] },
+    { name:'Kettlebell Renegade Row', difficulty:'Intermediate', category:'Rows', description:'Planking on two bells and alternating rows.', pattern:'row', setup:'Plank position with one hand on each kettlebell handle, feet set wide for stability.', steps:['Brace your core and glutes hard to keep your hips from rocking side to side.', 'Pull one bell straight up to your hip while the other arm stays locked, supporting your weight.', 'Set it down with control, then row the other side.'], mistakes:['Letting the hips rotate open toward the rowing arm.', 'Rushing the tempo, which turns the plank into a wobble.'], requiresTwoBells:true },
+    { name:'Kettlebell Batwing Hold', difficulty:'Intermediate', category:'Rows', description:'Holding two bells in a bent-over position near the ribs with shoulder blades pinched together, building upper-back and grip endurance.', pattern:'row', setup:'Bent over at the hips with a flat back, holding a bell in each hand pulled up near your ribs.', steps:['Pin your shoulder blades together and hold both bells tight to your body.', 'Keep breathing steadily while maintaining the hinge and the pulled-back shoulder position.', 'Hold for the prescribed time, resisting the urge to let the back round as fatigue sets in.'], mistakes:['Letting the back round as the hold gets hard — better to end the set than lose the flat back.', 'Letting the shoulder blades relax apart instead of staying pinned.'], requiresTwoBells:true },
+    { name:'Kettlebell Slingshot', difficulty:'Beginner', category:'Core', description:'Passing the bell hand-to-hand around your waist.', pattern:'rotate', setup:'Stand tall holding the bell by the horns in one hand at your waist.', steps:['Pass the bell around your waist from one hand to the other, letting it travel behind your back.', 'Keep your core braced and hips facing forward — the bell circles you, not the other way around.', 'Reverse direction after your set to work both sides evenly.'], mistakes:['Letting the torso twist to chase the bell around instead of staying still.', 'Losing grip tension right at the handoff behind the back.'] },
     { name:'Kettlebell Halo', difficulty:'Beginner', category:'Core', description:'Circling the bell around head and neck.', pattern:'rotate', setup:'Stand tall holding the bell upside down by the horns at chest/chin height.', steps:['Circle the bell around your head, staying close to your skull without bumping it.', 'Keep your core braced and ribs down — avoid arching your back as the bell passes behind your head.', 'Reverse direction each set to work both rotational directions evenly.'], mistakes:['Leaning the head forward to “duck under” the bell instead of keeping it still.', 'Letting the ribs flare and the back arch as the bell passes overhead.'] },
     { name:'Half-Kneeling Halo', difficulty:'Beginner', category:'Core', description:'Standard halo while in a lunge position with one knee on floor.', pattern:'rotate', setup:'Kneel with one knee down, opposite foot planted, holding the bell at chest height.', steps:['Circle the bell around your head exactly as in a standing halo.', 'Keep your hips square and stable in the half-kneeling stance throughout.', 'Reverse direction to complete work on both sides.'], mistakes:['Letting the torso lean or the hips shift to help the bell around.', 'Rushing the circle instead of keeping it slow and controlled.'] },
     { name:'Kettlebell Russian Twist', difficulty:'Beginner', category:'Core', description:'Sitting on floor with feet elevated, rotating bell side to side.', pattern:'rotate', setup:'Sit on the floor with knees bent, leaning back slightly, holding the bell at your chest, feet lifted if able.', steps:['Rotate your torso to tap the bell on the floor beside one hip.', 'Rotate through to the other side, keeping the motion coming from your core, not just your arms.', 'Keep your chest lifted throughout — don’t let your back round as you fatigue.'], mistakes:['Letting the arms do the twisting while the torso stays still.', 'Rounding the lower back as the set gets harder.'] },
     { name:'Kettlebell Sit-Up', difficulty:'Beginner', category:'Core', description:'Lying on your back holding the bell at your chest, sitting up under control and lowering back down.', pattern:'floor', setup:'Lie on your back, knees bent, feet flat, holding the bell at your chest.', steps:['Curl your torso up and forward, keeping the bell close to your chest the whole way.', 'Sit all the way up to a tall position, then lower back down under control.', 'Keep your neck relaxed — lead with your chest, not your chin.'], mistakes:['Yanking the bell to build momentum instead of using your abs.', 'Letting the feet fly up off the floor to help the sit-up along.'] },
     { name:'Kettlebell Side Bend', difficulty:'Beginner', category:'Core', description:'Standing with a bell in one hand, bending sideways at the waist and returning to standing. Targets the obliques.', pattern:'rotate', setup:'Stand tall with the bell in one hand at your side.', steps:['Bend directly sideways at the waist, letting the bell slide down toward your knee.', 'Keep your torso facing forward the whole time — this is a pure side bend, not a twist.', 'Squeeze your obliques to pull back up to tall.'], mistakes:['Twisting the torso forward or backward instead of bending straight to the side.', 'Using momentum to bounce back up instead of controlling it with your obliques.'] },
-    { name:"Farmer's Walk", difficulty:'Beginner', category:'Core', description:'Walking with a bell in each hand by your sides.', pattern:'carry', setup:'Stand tall holding a bell in each hand at your sides.', steps:['Brace your core and set your shoulders back and down before you start walking.', 'Take controlled steps, keeping your torso upright and the bells still — no swinging.', 'Keep your grip locked in for the full distance or time.'], mistakes:['Letting the shoulders round forward and up toward the ears as grip fatigues.', 'Taking steps that are too long, which makes the torso sway.'] },
-    { name:'Suitcase Walk', difficulty:'Beginner', category:'Core', description:'Walking with a bell in only one hand.', pattern:'carry', setup:'Stand tall holding one bell at your side.', steps:['Brace your core hard to resist leaning toward the loaded side.', 'Walk with even, controlled steps, keeping both shoulders level.', 'Switch sides for the next set to train both directions evenly.'], mistakes:['Letting the torso tip toward the kettlebell instead of staying vertical.', 'Shrugging the loaded shoulder up to compensate.'] },
-    { name:'Rack Carry', difficulty:'Intermediate', category:'Core', description:'Walking while holding bells in the front rack position.', pattern:'carry', setup:'Clean one or two bells into the front rack, standing tall.', steps:['Keep your elbow(s) tucked and the bell resting on your shoulder shelf, not just held by the arm.', 'Walk with controlled, even steps, keeping your torso upright.', 'Breathe steadily — the front rack position can restrict breathing if you tense up.'], mistakes:['Letting the rack drift away from the shoulder, turning it into a static arm hold.', 'Leaning back to counterbalance the front load.'] },
-    { name:"Kettlebell Waiter's Walk", difficulty:'Intermediate', category:'Core', description:'Walking while holding a bell locked out overhead in one hand, bracing the core to keep the arm stacked over the shoulder.', pattern:'carry', setup:'Press one bell to lockout overhead before you start walking.', steps:['Keep your arm locked and the bell stacked directly over your shoulder throughout.', 'Walk with small, controlled steps, keeping your ribs down and core braced.', 'Switch arms between sets to train both sides.'], mistakes:['Letting the arm drift forward out of the stacked position.', 'Arching the lower back to help hold the bell up.'] },
-    { name:'Overhead March', difficulty:'Intermediate', category:'Core', description:'Walking or marching in place with bell locked overhead.', pattern:'carry', setup:'Press one or two bells to lockout overhead, feet hip width.', steps:['Keep the arm(s) locked and stacked overhead throughout.', 'Lift one knee to hip height at a time, marching in place with control.', 'Keep your core braced so the overhead position doesn’t pull you off balance as you lift each knee.'], mistakes:['Letting the bell drift forward as you march.', 'Rushing the tempo instead of controlling each knee lift.'] },
+    { name:"Farmer's Walk", difficulty:'Beginner', category:'Carries', description:'Walking with a bell in each hand by your sides.', pattern:'carry', setup:'Stand tall holding a bell in each hand at your sides.', steps:['Brace your core and set your shoulders back and down before you start walking.', 'Take controlled steps, keeping your torso upright and the bells still — no swinging.', 'Keep your grip locked in for the full distance or time.'], mistakes:['Letting the shoulders round forward and up toward the ears as grip fatigues.', 'Taking steps that are too long, which makes the torso sway.'] },
+    { name:'Suitcase Walk', difficulty:'Beginner', category:'Carries', description:'Walking with a bell in only one hand.', pattern:'carry', setup:'Stand tall holding one bell at your side.', steps:['Brace your core hard to resist leaning toward the loaded side.', 'Walk with even, controlled steps, keeping both shoulders level.', 'Switch sides for the next set to train both directions evenly.'], mistakes:['Letting the torso tip toward the kettlebell instead of staying vertical.', 'Shrugging the loaded shoulder up to compensate.'] },
+    { name:'Rack Carry', difficulty:'Beginner', category:'Carries', description:'Walking while holding bells in the front rack position.', pattern:'carry', setup:'Clean one or two bells into the front rack, standing tall.', steps:['Keep your elbow(s) tucked and the bell resting on your shoulder shelf, not just held by the arm.', 'Walk with controlled, even steps, keeping your torso upright.', 'Breathe steadily — the front rack position can restrict breathing if you tense up.'], mistakes:['Letting the rack drift away from the shoulder, turning it into a static arm hold.', 'Leaning back to counterbalance the front load.'] },
+    { name:"Kettlebell Waiter's Walk", difficulty:'Intermediate', category:'Carries', description:'Walking while holding a bell locked out overhead in one hand, bracing the core to keep the arm stacked over the shoulder.', pattern:'carry', setup:'Press one bell to lockout overhead before you start walking.', steps:['Keep your arm locked and the bell stacked directly over your shoulder throughout.', 'Walk with small, controlled steps, keeping your ribs down and core braced.', 'Switch arms between sets to train both sides.'], mistakes:['Letting the arm drift forward out of the stacked position.', 'Arching the lower back to help hold the bell up.'] },
+    { name:'Overhead March', difficulty:'Intermediate', category:'Carries', description:'Walking or marching in place with bell locked overhead.', pattern:'carry', setup:'Press one or two bells to lockout overhead, feet hip width.', steps:['Keep the arm(s) locked and stacked overhead throughout.', 'Lift one knee to hip height at a time, marching in place with control.', 'Keep your core braced so the overhead position doesn’t pull you off balance as you lift each knee.'], mistakes:['Letting the bell drift forward as you march.', 'Rushing the tempo instead of controlling each knee lift.'] },
     { name:'Plank Drags', difficulty:'Intermediate', category:'Core', description:'Dragging bell laterally underneath body while in push-up plank.', pattern:'floor', setup:'Start in a push-up plank with the kettlebell to one side, just outside your hand.', steps:['Brace your core and glutes to keep your hips still and level.', 'Reach under your body with the opposite hand and drag the bell across to the other side.', 'Reset your hand under your shoulder and repeat, dragging it back the other way.'], mistakes:['Letting the hips rotate or sag as you reach for the bell.', 'Placing the hands too narrow, which makes the reach unstable.'] },
     { name:'Kettlebell Windmill', difficulty:'Intermediate', category:'Core', description:'Bell locked overhead in one hand while you hinge sideways at the hips, reaching the free hand toward the floor and keeping your eyes on the bell.', pattern:'rotate', setup:'Press one bell to lockout overhead, feet turned slightly away from the working side.', steps:['Keep your eyes on the bell and the arm locked throughout the movement.', 'Hinge sideways at the hips, reaching your free hand down toward the floor along your leg.', 'Keep the overhead arm stacked vertically above your shoulder the entire way down and back up.'], mistakes:['Letting the overhead arm drift forward instead of staying stacked.', 'Bending the front knee a lot, which turns the hip hinge into a squat.'] },
-    { name:'Turkish Get-Up', difficulty:'Advanced', category:'Core', description:'Complex floor-to-standing sequence with bell locked overhead.', pattern:'getup', setup:'Lie on your back holding the bell locked out overhead in one hand, same-side knee bent, foot flat on the floor.', steps:['Keep your eyes on the bell and the arm locked overhead for the entire sequence.', 'Press through your planted foot and opposite elbow to sit up, then post up onto your hand.', 'Sweep your back leg through into a lunge, then drive up to standing, bell still locked overhead.', 'Reverse the entire sequence step by step to return to the floor.'], mistakes:['Losing eye contact with the bell, which is often the first sign the arm is about to drift.', 'Rushing between steps instead of pausing to confirm each position is stable.', 'Letting the locked arm bend even slightly under fatigue.'] },
-    { name:"Bottoms-Up Waiter's Walk", difficulty:'Advanced', category:'Core', description:'Carrying bell upside down by handle, locked out overhead.', pattern:'carry', setup:'Hold the bell upside down by the handle, locked out overhead, base pointing at the ceiling.', steps:['Grip the handle hard — that tension is what keeps the bell from tipping over.', 'Walk with small, controlled steps, keeping the arm locked and stacked overhead.', 'Switch arms between sets, resetting your grip fully each time.'], mistakes:['Gripping too loosely and letting the bell wobble or tip.', 'Rushing the pace instead of moving slowly enough to stay balanced.'] },
-    { name:'Figure 8 to a Hold', difficulty:'Advanced', category:'Core', description:'Passing bell through legs and catching at chest height in a static hold.', pattern:'rotate', setup:'Stand in a quarter squat with the bell in one hand, ready to pass it through your legs.', steps:['Pass the bell in a figure-8 path around and through your legs, same as the standard Figure 8s.', 'On your final pass, catch the bell with both hands at chest height and stop there.', 'Hold that chest-height position steady for the prescribed time before releasing.'], mistakes:['Standing up out of the squat to make the hold easier.', 'Letting the back round to catch the final pass instead of staying in the squat.'] }
+    { name:'Turkish Get-Up', difficulty:'Advanced', category:'Core', description:'Complex floor-to-standing sequence with bell locked overhead.', pattern:'getup', setup:'Lie on your back holding the bell locked out overhead in one hand, same-side knee bent, foot flat on the floor.', steps:['Keep your eyes on the bell and the arm locked overhead for the entire sequence.', 'Press through your planted foot and opposite elbow to sit up, then post up onto your hand.', 'Bridge your hips up and sweep your back leg through into a kneeling lunge, then drive up to standing, bell still locked overhead.', 'Reverse the entire sequence step by step to return to the floor.'], mistakes:['Losing eye contact with the bell, which is often the first sign the arm is about to drift.', 'Rushing between steps instead of pausing to confirm each position is stable.', 'Letting the locked arm bend even slightly under fatigue.'] },
+    { name:"Bottoms-Up Waiter's Walk", difficulty:'Advanced', category:'Carries', description:'Carrying bell upside down by handle, locked out overhead.', pattern:'carry', setup:'Hold the bell upside down by the handle, locked out overhead, base pointing at the ceiling.', steps:['Grip the handle hard — that tension is what keeps the bell from tipping over.', 'Walk with small, controlled steps, keeping the arm locked and stacked overhead.', 'Switch arms between sets, resetting your grip fully each time.'], mistakes:['Gripping too loosely and letting the bell wobble or tip.', 'Rushing the pace instead of moving slowly enough to stay balanced.'] },
+    { name:'Figure 8 to a Hold', difficulty:'Advanced', category:'Core', description:'Passing bell through legs and catching at chest height in a static hold.', pattern:'rotate', setup:'Stand in a quarter squat with the bell in one hand, ready to pass it through your legs.', steps:['Pass the bell in a figure-8 path around and through your legs, same as the standard Figure 8s.', 'On your final pass, catch the bell with both hands at chest height and stop there.', 'Hold that chest-height position steady for the prescribed time before releasing.'], mistakes:['Standing up out of the squat to make the hold easier.', 'Letting the back round to catch the final pass instead of staying in the squat.'] },
+    { name:'Single-Arm Kettlebell Deadlift', difficulty:'Beginner', category:'Hinges', description:'Unilateral hinge holding one bell in a single hand at your side.', pattern:'hinge', setup:'Stand with feet hip-width apart, kettlebell on the floor a few inches outside one foot.', steps:['Push your hips back and hinge forward, reaching for the handle with the hand on the same side as the bell.', 'Grip the handle, pull your shoulder back and down, and take the slack out of your arm before pulling.', 'Drive through your whole foot and snap your hips forward to stand tall, keeping your torso square to the front.', 'Reverse the motion under control, hips back first, then complete your reps before switching sides.'], mistakes:['Letting the torso twist or lean toward the loaded side instead of staying square.', 'Rounding the lower back instead of hinging at the hips.', 'Rushing the side switch without resetting your stance and grip.'] },
+    { name:'Kettlebell Side Squat', difficulty:'Beginner', category:'Squats', description:'Lateral squat pattern shifting your weight side to side while holding the bell at your chest.', pattern:'squat', setup:'Stand tall with feet wider than shoulder width, holding the bell at your chest with both hands.', steps:['Shift your weight into one leg, pushing your hips back and bending that knee while the other leg stays straight.', 'Keep your chest up and the bell close to your body as you sit into the squat.', 'Drive back up to center through the bent leg, then repeat toward the other side.'], mistakes:['Letting the bent knee cave inward instead of tracking over the toes.', 'Letting the straight leg turn out instead of keeping that foot flat and pointed forward.', 'Rounding forward instead of keeping the chest tall through the shift.'] },
+    { name:'Kettlebell Front Raise', difficulty:'Beginner', category:'Presses', description:'Raising the bell straight out in front to shoulder height to build shoulder control.', pattern:'raise', setup:'Stand tall holding the bell by the horns with both hands in front of your thighs.', steps:['Keeping your arms straight but not locked, raise the bell out in front of you to shoulder height.', 'Pause briefly at the top, keeping your shoulders down away from your ears.', 'Lower the bell back down under control instead of dropping it.'], mistakes:['Using momentum from the hips or lower back to swing the bell up.', 'Raising the bell above shoulder height, which shifts the load onto the neck and traps.', 'Shrugging the shoulders up toward the ears during the lift.'] },
+    { name:'Kettlebell Around-the-Body Pass', difficulty:'Beginner', category:'Core', description:'Passing the bell hand to hand in a full circle around your waist.', pattern:'rotate', setup:'Stand tall holding the bell in one hand at waist height.', steps:['Pass the bell behind your back to your other hand, rotating your torso slightly to make the handoff.', 'Continue circling the bell all the way around your waist, staying tall through your spine.', 'Complete your reps in one direction, then reverse to circle the other way.'], mistakes:['Bending forward at the waist to reach for the handoff instead of staying upright.', 'Rushing the pass and losing grip on the handle.'] },
+    { name:'Kettlebell Toe Touch', difficulty:'Beginner', category:'Core', description:'Lying on your back reaching the bell toward your toes to work the upper abs.', pattern:'floor', setup:'Lie on your back with legs raised straight up toward the ceiling, holding the bell in both hands above your chest.', steps:['Curl your shoulders and upper back off the floor, reaching the bell toward your toes.', 'Keep your legs still and mostly straight throughout the movement.', 'Lower back down under control, keeping tension in your abs the whole way.'], mistakes:['Yanking the bell upward using momentum instead of squeezing the abs.', 'Letting the legs drop or sway to help the reach.', 'Pulling on the neck instead of leading with the chest.'] }
   ];
 
   // Exercises that require two kettlebells; everything else works with one.
@@ -479,12 +564,19 @@
 
   // avoidNames is a soft exclusion list (e.g. recently-served exercises): applied only
   // when it doesn't empty the pool, so filters never fail to return a result.
-  function pickForCategory(category, activeLevels, equipment, avoidNames){
+  function pickForCategory(category, activeLevels, equipment, avoidNames, mustExclude){
     var equipmentOk = equipment === 2 ? function(){ return true; } : function(e){ return !e.requiresTwoBells; };
     var byCategory = EXERCISES.filter(function(e){ return e.category === category; });
     var byEquipment = byCategory.filter(equipmentOk);
     var candidates = byEquipment.filter(function(e){ return activeLevels.indexOf(e.difficulty) !== -1; });
     var pool = candidates.length > 0 ? candidates : (byEquipment.length > 0 ? byEquipment : byCategory);
+    // A swap must actually change what's on screen whenever a different option exists —
+    // otherwise re-rolling the same pool can silently land back on the exercise the
+    // person just tapped away from, which reads as a broken button.
+    if (mustExclude){
+      var withoutCurrent = pool.filter(function(e){ return e.name !== mustExclude; });
+      if (withoutCurrent.length > 0) pool = withoutCurrent;
+    }
     if (avoidNames && avoidNames.length > 0){
       var fresh = pool.filter(function(e){ return avoidNames.indexOf(e.name) === -1; });
       if (fresh.length > 0) pool = fresh;
@@ -495,8 +587,10 @@
   function pickExercises(levels, equipment, categories, avoidNames){
     var activeLevels = levels.length > 0 ? levels : LEVELS;
     var activeCategories = categories && categories.length > 0 ? categories : CATEGORIES;
-    // Vary session size: 4 or 5 movements (or fewer if categories were excluded), one per chosen category.
-    var desired = Math.random() < 0.5 ? 4 : 5;
+    // Vary session size: 5 or 6 movements (or fewer if categories were excluded), one per chosen category.
+    // With 6 total categories, this keeps the same near-full coverage the old 4-or-5-of-5 range gave —
+    // a session almost always touches every movement pattern, occasionally skipping just one.
+    var desired = Math.random() < 0.5 ? 5 : 6;
     var count = Math.min(desired, activeCategories.length);
     var chosenCategories = shuffled(activeCategories).slice(0, count)
       .sort(function(a, b){ return CATEGORIES.indexOf(a) - CATEGORIES.indexOf(b); });
@@ -509,31 +603,63 @@
       return name.indexOf('farmer') !== -1 ? '20 steps' : '20 steps / side';
     }
     if (name.indexOf('get-up') !== -1) return '2 / side';
-    if (name.indexOf('single-leg') !== -1) return '8 / side';
-    if (name.indexOf('sit-up') !== -1) return '12 reps';
+    // Single-leg work is per-side by nature; single-arm deadlifts are unilateral in the
+    // same way even though "single-leg" doesn't appear in the name.
+    if (name.indexOf('single-leg') !== -1 || (name.indexOf('single-arm') !== -1 && name.indexOf('deadlift') !== -1)) return '8 / side';
+    if (name.indexOf('sit-up') !== -1 || name.indexOf('toe touch') !== -1) return '12 reps';
     if (exercise.category === 'Hinges') return (name.indexOf('snatch') !== -1 || name.indexOf('clean') !== -1) ? '6 reps' : '10 reps';
     if (exercise.category === 'Core') return '8 / side';
-    if (exercise.category === 'Squats') return name.indexOf('pistol') !== -1 ? '5 / side' : '8 reps';
+    if (exercise.category === 'Squats'){
+      if (name.indexOf('pistol') !== -1) return '5 / side';
+      if (name.indexOf('side squat') !== -1) return '8 / side';
+      return '8 reps';
+    }
+    if (name.indexOf('hold') !== -1) return '20 sec hold';
+    if (exercise.category === 'Presses' || exercise.category === 'Rows'){
+      // With one bell, presses/rows are almost always done one arm at a time, then
+      // switched — that's the right default. This list is the exceptions: moves where
+      // both arms work together (either on one shared bell, or two bells at once), so
+      // there's no "side" to switch and a flat rep count is correct instead.
+      var bilateral = [
+        'kettlebell floor press', 'double clean & jerk', 'double kettlebell thruster',
+        'see-saw press', 'double kettlebell bent-over row', 'kettlebell upright row',
+        'gorilla row', 'kettlebell pullover', 'kettlebell renegade row', 'kettlebell front raise'
+      ];
+      return bilateral.indexOf(name) !== -1 ? '8 reps' : '8 / side';
+    }
     return '8 / side';
   }
 
   // ---------- State ----------
-  // HISTORY_KEY/SAVED_KEY must be assigned before state.history/state.saved run below
-  // (var assignments execute top-to-bottom, unlike function declarations, which are hoisted).
+  // HISTORY_KEY/SAVED_KEY/SESSION_KEY must be assigned before state.history/state.saved/the
+  // restoreSession() call below run (var assignments execute top-to-bottom, unlike function
+  // declarations like restoreSession, findExerciseByName, etc., which are hoisted and can be
+  // defined later in the file).
   var HISTORY_KEY = 'kettlebellFlowHistory_v1';
   var SAVED_KEY = 'kettlebellFlowSaved_v1';
+  var SESSION_KEY = 'kettlebellFlowSession_v1';
   var DEFAULT_EQUIPMENT = 1;
+  var DEFAULT_DURATION = 20;
+  var TARGET_ROUNDS = 4; // Rounds mode is always a fixed 4 rounds - no picker, one less decision
+
+  // Whatever was on screen last time (equipment/level/category picks and the generated
+  // flow itself) so closing and reopening the app doesn't drop it. Deliberately does NOT
+  // restore mid-workout timer state (running/paused/rounds) - only what's needed to land
+  // back on the same session setup, not resume a run in progress.
+  var restored = restoreSession();
+
   var state = {
-    equipment: DEFAULT_EQUIPMENT,
-    duration: 20,
-    selectedLevels: LEVELS.slice(),
-    selectedCategories: CATEGORIES.slice(),
+    equipment: restored ? restored.equipment : DEFAULT_EQUIPMENT,
+    sessionMode: restored ? restored.sessionMode : 'amrap', // amrap | rounds
+    duration: restored ? restored.duration : DEFAULT_DURATION,
+    selectedLevels: restored ? restored.selectedLevels : LEVELS.slice(),
+    selectedCategories: restored ? restored.selectedCategories : CATEGORIES.slice(),
     recentFlows: [], // last 1-2 generated flows' exercise names, used to avoid back-to-back repeats
-    exercises: pickExercises(LEVELS, DEFAULT_EQUIPMENT, CATEGORIES),
+    exercises: restored ? restored.exercises : pickExercises(LEVELS, DEFAULT_EQUIPMENT, CATEGORIES),
     expandedExercise: null,
     expandedHistoryIndex: null,
     generation: 1,
-    timeRemaining: 20 * 60,
+    timeRemaining: (restored ? restored.duration : DEFAULT_DURATION) * 60,
     countdown: null,
     timerState: 'ready', // ready | countdown | running | paused | complete
     roundsCompleted: 0,
@@ -541,6 +667,7 @@
     history: loadHistory(),
     saved: loadSaved(),
     expandedSavedId: null,
+    renamingSavedId: null,
     librarySearch: '',
     libraryFilterCategory: 'All',
     expandedLibraryName: null,
@@ -633,6 +760,13 @@
     return String(minutes).padStart(2,'0') + ':' + String(seconds).padStart(2,'0');
   }
   function pad2(n){ return String(n).padStart(2,'0'); }
+  // Saved-flow names are free-typed by the person (unlike exercise names, which come
+  // from the fixed EXERCISES list), so they need escaping before going into innerHTML.
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(ch){
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
 
   // ---------- Session history (on-device only; degrades gracefully if storage is blocked) ----------
   function loadHistory(){
@@ -657,6 +791,62 @@
   function saveSavedList(){
     try { localStorage.setItem(SAVED_KEY, JSON.stringify(state.saved)); } catch (e){ /* storage unavailable here - saved list stays for this session only */ }
   }
+
+  // ---------- Current session (on-device only; degrades gracefully if storage is blocked) ----------
+  // Snapshots just enough to rebuild the on-screen setup: the four generator settings and
+  // the flow that was showing. Exercises are stored by name (like Saved Workouts already
+  // do) and rehydrated against the live EXERCISES list on load, so an app update that
+  // renames/removes a move can't leave this holding a broken reference.
+  function saveSessionState(){
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({
+        equipment: state.equipment,
+        sessionMode: state.sessionMode,
+        duration: state.duration,
+        selectedLevels: state.selectedLevels,
+        selectedCategories: state.selectedCategories,
+        flow: state.exercises.map(function(e){ return { name: e.name, category: e.category, difficulty: e.difficulty }; })
+      }));
+    } catch (e){ /* storage unavailable here - session settings stay for this browser session only */ }
+  }
+  function restoreSession(){
+    try {
+      var raw = localStorage.getItem(SESSION_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return null;
+
+      var equipment = (parsed.equipment === 1 || parsed.equipment === 2) ? parsed.equipment : DEFAULT_EQUIPMENT;
+      var sessionMode = (parsed.sessionMode === 'amrap' || parsed.sessionMode === 'rounds') ? parsed.sessionMode : 'amrap';
+      var duration = (parsed.duration === 15 || parsed.duration === 20) ? parsed.duration : DEFAULT_DURATION;
+      var selectedLevels = (Array.isArray(parsed.selectedLevels) && parsed.selectedLevels.length > 0 &&
+        parsed.selectedLevels.every(function(l){ return LEVELS.indexOf(l) !== -1; })) ? parsed.selectedLevels : LEVELS.slice();
+      var selectedCategories = (Array.isArray(parsed.selectedCategories) && parsed.selectedCategories.length > 0 &&
+        parsed.selectedCategories.every(function(c){ return CATEGORIES.indexOf(c) !== -1; })) ? parsed.selectedCategories : CATEGORIES.slice();
+
+      // Rebuild each exercise by name against the live library rather than trusting the
+      // snapshot's category/difficulty outright - if a stored name is unrecognized (an app
+      // update removed/renamed it) AND its snapshot fields aren't valid either, drop that
+      // entry instead of keeping a half-formed object that later rendering code assumes
+      // always has a real category/difficulty.
+      var exercises = null;
+      if (Array.isArray(parsed.flow) && parsed.flow.length > 0){
+        var rebuilt = [];
+        parsed.flow.forEach(function(snap){
+          if (!snap || typeof snap.name !== 'string') return;
+          var full = findExerciseByName(snap.name);
+          if (full){ rebuilt.push(full); return; }
+          if (CATEGORIES.indexOf(snap.category) !== -1 && LEVELS.indexOf(snap.difficulty) !== -1){
+            rebuilt.push({ name: snap.name, category: snap.category, difficulty: snap.difficulty, description: '', requiresTwoBells: false });
+          }
+        });
+        if (rebuilt.length > 0) exercises = rebuilt;
+      }
+      if (!exercises) exercises = pickExercises(selectedLevels, equipment, selectedCategories);
+
+      return { equipment: equipment, sessionMode: sessionMode, duration: duration, selectedLevels: selectedLevels, selectedCategories: selectedCategories, exercises: exercises };
+    } catch (e){ return null; }
+  }
   function flowSignature(flow){
     return flow.map(function(e){ return e.name; }).join('|');
   }
@@ -664,10 +854,20 @@
     var sig = flowSignature(flow);
     return state.saved.some(function(s){ return flowSignature(s.flow) === sig; });
   }
+  // Auto-generated so saving stays a single tap - editable afterward via the
+  // RENAME action, so this only needs to be a reasonable starting point, not
+  // a perfect description.
+  function defaultFlowName(flow){
+    var unique = [];
+    flow.forEach(function(e){ if (unique.indexOf(e.category) === -1) unique.push(e.category); });
+    if (unique.length >= 4) return 'Full Body Flow';
+    return unique.join(' + ') + ' Flow';
+  }
   function saveFlow(flow, duration){
     if (isFlowSaved(flow)) return;
     state.saved.push({
       id: Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+      name: defaultFlowName(flow),
       flow: flow.map(function(e){ return { name: e.name, category: e.category, difficulty: e.difficulty, reps: repetitionTarget(e) }; }),
       duration: duration,
       savedAt: localDateKey(new Date())
@@ -696,6 +896,7 @@
     setActiveView('session');
     renderExercises();
     renderSaveBtn();
+    saveSessionState();
   }
   function localDateKey(d){
     return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
@@ -726,7 +927,23 @@
   function recordSessionComplete(){
     state.history.push({
       date: localDateKey(new Date()),
+      mode: 'amrap',
       duration: state.duration,
+      rounds: state.roundsCompleted,
+      exercises: state.exercises.length,
+      flow: state.exercises.map(function(e){
+        return { name: e.name, category: e.category, difficulty: e.difficulty, reps: repetitionTarget(e) };
+      })
+    });
+    saveHistory();
+    renderHistory();
+  }
+
+  function recordRoundsSessionComplete(){
+    state.history.push({
+      date: localDateKey(new Date()),
+      mode: 'rounds',
+      duration: null,
       rounds: state.roundsCompleted,
       exercises: state.exercises.length,
       flow: state.exercises.map(function(e){
@@ -812,15 +1029,32 @@
   // ---------- DOM refs ----------
   var el = {
     equipmentRow: document.getElementById('equipment-row'),
+    modeRow: document.getElementById('mode-row'),
+    durationSection: document.getElementById('duration-section'),
     durationRow: document.getElementById('duration-row'),
     levelRow: document.getElementById('level-row'),
     categoryRow: document.getElementById('category-row'),
     generateBtn: document.getElementById('generate-btn'),
-    flowMeta: document.getElementById('flow-meta'),
+    amrapStripCopy: document.getElementById('amrap-strip-copy'),
+    amrapStripValue: document.getElementById('amrap-strip-value'),
+    sessionTimerPanel: document.getElementById('session-timer-panel'),
+    roundTrackerPanel: document.getElementById('round-tracker-panel'),
+    rtActive: document.getElementById('rt-active'),
+    rtDone: document.getElementById('rt-done'),
+    rtCountWrap: document.getElementById('rt-count-wrap'),
+    rtCountNum: document.getElementById('rt-count-num'),
+    rtUndo: document.getElementById('rt-undo'),
+    rtFinishBtn: document.getElementById('rt-finish-btn'),
+    rtFinishText: document.getElementById('rt-finish-text'),
+    rtDoneLabel: document.getElementById('rt-done-label'),
+    rtRestartBtn: document.getElementById('rt-restart-btn'),
+    loadFlowBtn: document.getElementById('load-flow-btn'),
+    loadFlowBackdrop: document.getElementById('load-flow-backdrop'),
+    loadFlowSheet: document.getElementById('load-flow-sheet'),
+    loadFlowSheetList: document.getElementById('load-flow-sheet-list'),
+    loadFlowCloseBtn: document.getElementById('load-flow-close-btn'),
     shareBtn: document.getElementById('share-btn'),
     exerciseList: document.getElementById('exercise-list'),
-    amrapDuration: document.getElementById('amrap-duration'),
-    timerMeta: document.getElementById('timer-meta'),
     ringProgress: document.getElementById('ring-progress'),
     timerNumber: document.getElementById('timer-number'),
     timerUnit: document.getElementById('timer-unit'),
@@ -834,7 +1068,6 @@
     timerToggleBtn: document.getElementById('timer-toggle-btn'),
     timerToggleIcon: document.getElementById('timer-toggle-icon'),
     timerToggleText: document.getElementById('timer-toggle-text'),
-    historyMeta: document.getElementById('history-meta'),
     streakValue: document.getElementById('streak-value'),
     totalValue: document.getElementById('total-value'),
     historyList: document.getElementById('history-list'),
@@ -848,11 +1081,9 @@
     viewHistory: document.getElementById('view-history'),
     viewSaved: document.getElementById('view-saved'),
     saveFlowBtn: document.getElementById('save-flow-btn'),
-    savedMeta: document.getElementById('saved-meta'),
     savedList: document.getElementById('saved-list'),
     menuItemLibrary: document.getElementById('menu-item-library'),
     viewLibrary: document.getElementById('view-library'),
-    libraryMeta: document.getElementById('library-meta'),
     librarySearchInput: document.getElementById('library-search-input'),
     libraryFilterRow: document.getElementById('library-filter-row'),
     libraryList: document.getElementById('library-list'),
@@ -871,10 +1102,7 @@
       var btn = document.createElement('button');
       btn.className = 'duration-btn' + (state.equipment === option ? ' selected' : '');
       btn.setAttribute('data-testid', 'button-equipment-' + option);
-      btn.innerHTML =
-        '<span class="duration-num">' + option + '</span>' +
-        '<span class="duration-caption">KETTLEBELL' + (option === 2 ? 'S' : '') + '</span>' +
-        (state.equipment === option ? checkSvg() : '');
+      btn.textContent = option + ' KETTLEBELL' + (option === 2 ? 'S' : '');
       btn.addEventListener('click', function(){ selectEquipment(option); });
       el.equipmentRow.appendChild(btn);
     });
@@ -886,17 +1114,62 @@
       var btn = document.createElement('button');
       btn.className = 'duration-btn' + (state.duration === option ? ' selected' : '');
       btn.setAttribute('data-testid', 'button-duration-' + option);
-      btn.innerHTML =
-        '<span class="duration-num">' + option + '</span>' +
-        '<span class="duration-caption">MINUTES</span>' +
-        (state.duration === option ? checkSvg() : '');
+      btn.textContent = option + ' MIN';
       btn.addEventListener('click', function(){ selectDuration(option); });
       el.durationRow.appendChild(btn);
     });
   }
 
-  function checkSvg(){
-    return '<svg class="check" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.5" stroke="#e7f31b" stroke-width="1.6"/><path d="m8 12.5 2.5 2.5L16 9.5" stroke="#e7f31b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function renderModeRow(){
+    el.modeRow.innerHTML = '';
+    [['amrap', 'AMRAP'], ['rounds', 'ROUNDS']].forEach(function(pair){
+      var mode = pair[0], label = pair[1];
+      var btn = document.createElement('button');
+      btn.className = 'mode-btn' + (state.sessionMode === mode ? ' selected' : '');
+      btn.setAttribute('data-testid', 'button-mode-' + mode);
+      btn.textContent = label;
+      btn.addEventListener('click', function(){ selectSessionMode(mode); });
+      el.modeRow.appendChild(btn);
+    });
+  }
+
+  function renderDurationSection(){
+    el.durationSection.hidden = state.sessionMode !== 'amrap';
+  }
+
+  function renderAmrapStrip(){
+    if (state.sessionMode === 'rounds'){
+      el.amrapStripCopy.innerHTML = '<div class="amrap-label">COMPLETE EACH ROUND</div><div class="amrap-label">WITH GOOD FORM</div>';
+      el.amrapStripValue.textContent = TARGET_ROUNDS + ' ROUNDS';
+    } else {
+      el.amrapStripCopy.innerHTML = '<div class="amrap-label">AS MANY QUALITY ROUNDS</div><div class="amrap-label">AS POSSIBLE</div>';
+      el.amrapStripValue.textContent = 'AMRAP';
+    }
+  }
+
+  function renderSessionPanels(){
+    el.sessionTimerPanel.hidden = state.sessionMode !== 'amrap';
+    el.roundTrackerPanel.hidden = state.sessionMode !== 'rounds';
+  }
+
+  // Round Tracker (Rounds mode): a single button whose label counts up ("ROUND 1
+  // FINISHED" -> "ROUND 2 FINISHED" -> ...) and switches to "FINISH SESSION" for the
+  // last one, so there's no separate start button and no arithmetic to track in your
+  // head. Tapping the count itself (or the "TAP COUNT TO UNDO" link that appears once
+  // there's progress) steps back one round, covering an accidental double-tap.
+  function renderRoundTracker(){
+    el.rtDoneLabel.textContent = TARGET_ROUNDS + ' / ' + TARGET_ROUNDS + ' ROUNDS COMPLETE';
+    var complete = state.roundsCompleted >= TARGET_ROUNDS;
+    el.rtActive.hidden = complete;
+    el.rtDone.hidden = !complete;
+    if (complete) return;
+
+    el.rtCountNum.textContent = state.roundsCompleted;
+    var hasProgress = state.roundsCompleted > 0;
+    el.rtUndo.hidden = !hasProgress;
+    el.rtCountWrap.classList.toggle('has-progress', hasProgress);
+    var remaining = TARGET_ROUNDS - state.roundsCompleted;
+    el.rtFinishText.textContent = remaining === 1 ? 'FINISH SESSION' : 'ROUND ' + (state.roundsCompleted + 1) + ' FINISHED';
   }
 
   function renderLevelRow(){
@@ -906,7 +1179,7 @@
       var btn = document.createElement('button');
       btn.className = 'level-btn' + (selected ? ' selected' : '');
       btn.setAttribute('data-testid', 'button-level-' + level.toLowerCase());
-      btn.innerHTML = '<span>' + level.toUpperCase() + '</span>' + (selected ? checkSmallSvg() : '');
+      btn.textContent = level.toUpperCase();
       btn.addEventListener('click', function(){ toggleLevel(level); });
       el.levelRow.appendChild(btn);
     });
@@ -926,7 +1199,7 @@
   }
 
   function checkSmallSvg(){
-    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.5" stroke="#e7f31b" stroke-width="1.6"/><path d="m8 12.5 2.5 2.5L16 9.5" stroke="#e7f31b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.5" stroke="#e7f31b" stroke-width="1.6"/><path d="m8 12.5 2.5 2.5L16 9.5" stroke="#e7f31b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
 
   function swapSvg(){
@@ -934,14 +1207,18 @@
   }
 
   function shareSvg(){
-    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 15V3M8 7l4-4 4 4" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 15V3M8 7l4-4 4 4" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+
+  function folderSvg(){
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 6.5a1 1 0 0 1 1-1h5l2 2.2h9a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6.5Z" stroke="#9da19d" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   }
 
   function muteSvg(muted){
     if (muted){
-      return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="#e7f31b" stroke-width="1.8" stroke-linejoin="round"/><path d="m16 9 5 6M21 9l-5 6" stroke="#e7f31b" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="#e7f31b" stroke-width="1.8" stroke-linejoin="round"/><path d="m16 9 5 6M21 9l-5 6" stroke="#e7f31b" stroke-width="1.8" stroke-linecap="round"/></svg>';
     }
-    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="#9da19d" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M11 5 6 9H3v6h3l5 4V5Z" stroke="#9da19d" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="#9da19d" stroke-width="1.8" stroke-linecap="round"/></svg>';
   }
 
   function renderMuteBtn(){
@@ -952,7 +1229,7 @@
   function bookmarkSvg(saved){
     var color = saved ? '#e7f31b' : '#9da19d';
     var fill = saved ? color : 'none';
-    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="' + fill + '"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1Z" stroke="' + color + '" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="' + fill + '"><path d="M6 3.5h12a1 1 0 0 1 1 1V21l-7-4.2L5 21V4.5a1 1 0 0 1 1-1Z" stroke="' + color + '" stroke-width="1.8" stroke-linejoin="round"/></svg>';
   }
 
   function renderSaveBtn(){
@@ -964,20 +1241,22 @@
 
   function renderSaved(){
     var total = state.saved.length;
-    el.savedMeta.textContent = total + (total === 1 ? ' SAVED WORKOUT' : ' SAVED WORKOUTS');
     if (total === 0){
       el.savedList.innerHTML = '<div class="history-empty">Save a flow you enjoyed to find it here later.</div>';
+      renderLoadMenu();
       return;
     }
     el.savedList.innerHTML = '';
     state.saved.slice().reverse().forEach(function(s){
       var expanded = state.expandedSavedId === s.id;
+      var renaming = state.renamingSavedId === s.id;
       var detail = s.duration + ' MIN · ' + s.flow.length + ' MOVES · SAVED ' + formatHistoryDate(s.savedAt);
+      var displayName = escapeHtml(s.name || 'Saved Flow');
       var row = document.createElement('div');
       row.className = 'history-row' + (expanded ? ' expanded' : '');
       var html =
         '<button class="history-row-head" data-testid="button-saved-' + s.id + '">' +
-          '<div><div class="history-date">SAVED FLOW</div><div class="history-detail">' + detail + '</div></div>' +
+          '<div><div class="history-date">' + displayName + '</div><div class="history-detail">' + detail + '</div></div>' +
           '<span class="expand-mark">' + (expanded ? '−' : '+') + '</span>' +
         '</button>';
       if (expanded){
@@ -985,22 +1264,39 @@
           return '<div class="history-flow-row"><span class="history-flow-num">' + pad2(i2 + 1) + '</span>' +
             '<div class="history-flow-main"><div class="history-flow-name">' + e.name + '</div>' +
             '<div class="history-flow-meta">' + e.category.toUpperCase() + ' · ' + e.difficulty.toUpperCase() + ' · ' + e.reps + '</div></div></div>';
-        }).join('') +
-        '<div class="saved-actions">' +
-          '<button class="time-adjust-btn load-btn" data-testid="button-load-' + s.id + '">LOAD</button>' +
-          '<button class="time-adjust-btn remove-btn" data-testid="button-remove-' + s.id + '">REMOVE</button>' +
-        '</div>' +
-        '</div>';
+        }).join('');
+        if (renaming){
+          html +=
+            '<div class="rename-row">' +
+              '<input class="rename-input" type="text" value="' + escapeHtml(s.name || '') + '" maxlength="60" data-testid="input-rename-' + s.id + '" />' +
+              '<button class="time-adjust-btn rename-confirm-btn" data-testid="button-rename-save-' + s.id + '">SAVE</button>' +
+              '<button class="time-adjust-btn rename-cancel-btn" data-testid="button-rename-cancel-' + s.id + '">CANCEL</button>' +
+            '</div>';
+        } else {
+          html +=
+            '<div class="saved-actions">' +
+              '<button class="time-adjust-btn load-btn" data-testid="button-load-' + s.id + '">LOAD</button>' +
+              '<button class="time-adjust-btn rename-btn" data-testid="button-rename-' + s.id + '">RENAME</button>' +
+              '<button class="time-adjust-btn remove-btn" data-testid="button-remove-' + s.id + '">REMOVE</button>' +
+            '</div>';
+        }
+        html += '</div>';
       }
       row.innerHTML = html;
       row.querySelector('.history-row-head').addEventListener('click', function(){
         state.expandedSavedId = expanded ? null : s.id;
+        state.renamingSavedId = null;
         renderSaved();
       });
-      if (expanded){
+      if (expanded && !renaming){
         row.querySelector('.load-btn').addEventListener('click', function(evt){
           evt.stopPropagation();
           loadSavedIntoGenerator(s);
+        });
+        row.querySelector('.rename-btn').addEventListener('click', function(evt){
+          evt.stopPropagation();
+          state.renamingSavedId = s.id;
+          renderSaved();
         });
         row.querySelector('.remove-btn').addEventListener('click', function(evt){
           evt.stopPropagation();
@@ -1011,13 +1307,35 @@
           renderHistory();
         });
       }
+      if (renaming){
+        var input = row.querySelector('.rename-input');
+        var commit = function(){
+          var next = input.value.trim();
+          if (next) s.name = next;
+          state.renamingSavedId = null;
+          saveSavedList();
+          renderSaved();
+        };
+        var cancel = function(){
+          state.renamingSavedId = null;
+          renderSaved();
+        };
+        row.querySelector('.rename-confirm-btn').addEventListener('click', function(evt){ evt.stopPropagation(); commit(); });
+        row.querySelector('.rename-cancel-btn').addEventListener('click', function(evt){ evt.stopPropagation(); cancel(); });
+        input.addEventListener('click', function(evt){ evt.stopPropagation(); });
+        input.addEventListener('keydown', function(evt){
+          if (evt.key === 'Enter') commit();
+          else if (evt.key === 'Escape') cancel();
+        });
+        setTimeout(function(){ input.focus(); input.select(); }, 0);
+      }
       el.savedList.appendChild(row);
     });
+    renderLoadMenu();
   }
 
   function renderHistory(){
     var total = state.history.length;
-    el.historyMeta.textContent = total + (total === 1 ? ' SESSION' : ' SESSIONS');
     el.streakValue.textContent = computeStreak(state.history);
     el.totalValue.textContent = total;
     // Keep each entry's true index into state.history so expand/collapse state
@@ -1032,7 +1350,9 @@
       var h = item.h;
       var idx = item.i;
       var expanded = state.expandedHistoryIndex === idx;
-      var detail = h.duration + ' MIN · ' + h.rounds + ' ROUND' + (h.rounds === 1 ? '' : 'S') + ' · ' + h.exercises + ' MOVES';
+      var detail = h.mode === 'rounds'
+        ? (h.rounds + ' ROUND' + (h.rounds === 1 ? '' : 'S') + ' · ' + h.exercises + ' MOVES')
+        : (h.duration + ' MIN · ' + h.rounds + ' ROUND' + (h.rounds === 1 ? '' : 'S') + ' · ' + h.exercises + ' MOVES');
       var hasFlow = !!(h.flow && h.flow.length > 0);
       var row = document.createElement('div');
       row.className = 'history-row' + (expanded ? ' expanded' : '');
@@ -1104,7 +1424,6 @@
 
   function renderLibrary(){
     var matches = libraryMatches();
-    el.libraryMeta.textContent = matches.length + (matches.length === 1 ? ' MOVEMENT' : ' MOVEMENTS');
     if (matches.length === 0){
       el.libraryList.innerHTML = '<div class="library-empty">No movements match your search.</div>';
       return;
@@ -1194,12 +1513,6 @@
       }
       el.exerciseList.appendChild(row);
     });
-    el.flowMeta.textContent = state.exercises.length + ' MOVEMENTS · ' + state.exercises.length + ' CATEGORIES';
-  }
-
-  function renderTimerStatics(){
-    el.amrapDuration.textContent = ' ' + state.duration + ' MIN';
-    el.timerMeta.textContent = state.duration + ' MIN';
   }
 
   function renderTimer(){
@@ -1241,12 +1554,16 @@
 
   function renderAll(){
     renderEquipmentRow();
+    renderModeRow();
+    renderDurationSection();
     renderDurationRow();
     renderLevelRow();
     renderCategoryRow();
     renderExercises();
-    renderTimerStatics();
+    renderAmrapStrip();
+    renderSessionPanels();
     renderTimer();
+    renderRoundTracker();
     renderMuteBtn();
     renderHistory();
     renderSaveBtn();
@@ -1255,6 +1572,7 @@
     renderLibrary();
     renderView();
     el.shareBtn.innerHTML = shareSvg();
+    el.loadFlowBtn.innerHTML = folderSvg();
   }
 
   // ---------- Menu / view switching ----------
@@ -1276,6 +1594,7 @@
     window.scrollTo(0, 0);
   }
   function openMenu(){
+    closeLoadMenu();
     el.menuDropdown.hidden = false;
     el.menuBtn.setAttribute('aria-expanded', 'true');
   }
@@ -1285,6 +1604,53 @@
   }
   function toggleMenu(){
     if (el.menuDropdown.hidden) openMenu(); else closeMenu();
+  }
+
+  // ---------- Load-a-saved-flow bottom sheet ----------
+  // A full-width sheet rather than a small anchored dropdown - once someone has a dozen+
+  // saved flows, scrolling a tall list needs real room on a phone, not a cramped corner
+  // panel fighting for space near the button that opened it.
+  function renderLoadMenu(){
+    if (state.saved.length === 0){
+      el.loadFlowSheetList.innerHTML = '';
+      return;
+    }
+    el.loadFlowSheetList.innerHTML = state.saved.slice().reverse().map(function(s){
+      var name = escapeHtml(s.name || 'Saved Flow');
+      var detail = s.duration + ' MIN · ' + s.flow.length + ' MOVES · SAVED ' + formatHistoryDate(s.savedAt);
+      return '<button class="load-flow-item" data-id="' + s.id + '" data-testid="button-load-flow-' + s.id + '">' +
+        '<div class="load-flow-name">' + name + '</div><div class="load-flow-detail">' + detail + '</div></button>';
+    }).join('');
+    Array.prototype.forEach.call(el.loadFlowSheetList.querySelectorAll('.load-flow-item'), function(btn){
+      btn.addEventListener('click', function(evt){
+        evt.stopPropagation();
+        var id = btn.getAttribute('data-id');
+        var saved = state.saved.find(function(s){ return String(s.id) === id; });
+        if (saved) loadSavedIntoGenerator(saved);
+        closeLoadMenu();
+      });
+    });
+  }
+  function openLoadMenu(){
+    if (state.saved.length === 0){
+      // Nothing to pick from - give feedback instead of opening an empty sheet.
+      vibrate([30, 60, 30]);
+      return;
+    }
+    closeMenu();
+    el.loadFlowBackdrop.hidden = false;
+    el.loadFlowSheet.hidden = false;
+    el.loadFlowBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden'; // keep the page still while browsing the sheet
+  }
+  function closeLoadMenu(){
+    el.loadFlowBackdrop.hidden = true;
+    el.loadFlowSheet.hidden = true;
+    el.loadFlowBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  function toggleLoadMenu(){
+    if (el.loadFlowSheet.hidden) openLoadMenu(); else closeLoadMenu();
   }
 
   // ---------- Actions ----------
@@ -1297,6 +1663,7 @@
     state.roundsCompleted = 0;
     releaseWakeLock();
     renderTimer();
+    renderRoundTracker();
   }
 
   function generateFlow(){
@@ -1310,6 +1677,7 @@
     resetSession();
     renderExercises();
     renderSaveBtn();
+    saveSessionState();
     vibrate(30);
   }
 
@@ -1326,6 +1694,7 @@
     ensureAudio();
     state.equipment = option;
     renderEquipmentRow();
+    saveSessionState();
     vibrate(15);
   }
 
@@ -1334,11 +1703,19 @@
     var current = state.exercises[index];
     var activeLevels = state.selectedLevels.length > 0 ? state.selectedLevels : LEVELS;
     var avoidNames = state.recentFlows.reduce(function(acc, flow){ return acc.concat(flow); }, []).concat([current.name]);
-    var replacement = pickForCategory(current.category, activeLevels, state.equipment, avoidNames);
+    var replacement = pickForCategory(current.category, activeLevels, state.equipment, avoidNames, current.name);
+    if (replacement.name === current.name){
+      // Only the exercise already on screen fits this category/equipment/level combo —
+      // there's nothing to swap to. Give a distinct buzz instead of doing nothing so
+      // it doesn't read as a broken button.
+      vibrate([30, 60, 30]);
+      return;
+    }
     state.exercises[index] = replacement;
     if (state.expandedExercise === current.name) state.expandedExercise = null;
     renderExercises();
     renderSaveBtn();
+    saveSessionState();
     vibrate(20);
   }
 
@@ -1396,8 +1773,47 @@
     state.duration = nextDuration;
     resetSession(nextDuration);
     renderDurationRow();
-    renderTimerStatics();
+    saveSessionState();
     vibrate(15);
+  }
+
+  function selectSessionMode(mode){
+    ensureAudio();
+    if (state.sessionMode === mode) return;
+    state.sessionMode = mode;
+    resetSession(); // stop any running timer, clear rounds - switching mode mid-session doesn't carry state over
+    renderModeRow();
+    renderDurationSection();
+    renderAmrapStrip();
+    renderSessionPanels();
+    saveSessionState();
+    vibrate(15);
+  }
+
+  // Tapping the round-finished button both starts the session (first tap) and advances
+  // it - there's nothing to press before it. No beep on each tap or on completion since
+  // Rounds mode has no countdown and (per the mute button being removed here) no audio
+  // cues at all; a vibration is enough feedback.
+  function finishRound(){
+    ensureAudio();
+    if (state.roundsCompleted >= TARGET_ROUNDS) return;
+    state.roundsCompleted += 1;
+    vibrate(state.roundsCompleted >= TARGET_ROUNDS ? [0, 60, 60, 60, 60, 60] : 20);
+    if (state.roundsCompleted >= TARGET_ROUNDS) recordRoundsSessionComplete();
+    renderRoundTracker();
+  }
+
+  function undoRound(){
+    if (state.roundsCompleted <= 0) return;
+    state.roundsCompleted -= 1;
+    vibrate(15);
+    renderRoundTracker();
+  }
+
+  function restartRoundsSession(){
+    state.roundsCompleted = 0;
+    vibrate(15);
+    renderRoundTracker();
   }
 
   function toggleLevel(level){
@@ -1410,6 +1826,7 @@
       state.selectedLevels.sort(function(a,b){ return LEVELS.indexOf(a) - LEVELS.indexOf(b); });
     }
     renderLevelRow();
+    saveSessionState();
     vibrate(15);
   }
 
@@ -1423,6 +1840,7 @@
       state.selectedCategories.sort(function(a,b){ return CATEGORIES.indexOf(a) - CATEGORIES.indexOf(b); });
     }
     renderCategoryRow();
+    saveSessionState();
     vibrate(15);
   }
 
@@ -1524,9 +1942,19 @@
   el.timerToggleBtn.addEventListener('click', toggleTimer);
   el.minusMinBtn.addEventListener('click', function(){ adjustTime(-60); });
   el.plusMinBtn.addEventListener('click', function(){ adjustTime(60); });
+  el.rtFinishBtn.addEventListener('click', finishRound);
+  el.rtUndo.addEventListener('click', undoRound);
+  el.rtCountWrap.addEventListener('click', undoRound);
+  el.rtRestartBtn.addEventListener('click', restartRoundsSession);
   el.muteBtn.addEventListener('click', toggleMute);
   el.shareBtn.addEventListener('click', shareWorkout);
   el.saveFlowBtn.addEventListener('click', toggleSaveCurrentFlow);
+  el.loadFlowBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    toggleLoadMenu();
+  });
+  el.loadFlowCloseBtn.addEventListener('click', closeLoadMenu);
+  el.loadFlowBackdrop.addEventListener('click', closeLoadMenu);
 
   el.menuBtn.addEventListener('click', function(e){
     e.stopPropagation();
@@ -1551,7 +1979,7 @@
     if (!el.menuDropdown.hidden && !el.menuWrap.contains(e.target)) closeMenu();
   });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape'){ closeMenu(); closeLoadMenu(); }
   });
 
   // Unlock audio context on first touch anywhere (iOS requirement)
